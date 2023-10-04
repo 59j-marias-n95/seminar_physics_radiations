@@ -1,0 +1,9 @@
+CROMOGRAMA DE LA INVESTIGACIÓN
+Fechas para presentación de avances:
+Avance 1: Fin de fase 1 y 2 de revisión de la literatura: lunes, 16 de octubre.
+
+Avance 2: Fin de fase 3 de modelado: martes, 14 de noviembre.
+
+Avance 3: Fin de fase 4 de simulación numérica: jueves, 30 de noviembre.
+
+Para detalles de la fase, ver propuesta de investigación. 

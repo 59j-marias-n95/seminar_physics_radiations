@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: propuesta_proyecto_seminario.aux
+The style file: apalike.bst
+Database file #1: biblio_proyecto_seminario_rads.bib
+You've used 7 entries,
+            1935 wiz_defined-function locations,
+            519 strings with 4944 characters,
+and the built_in function-call counts, 2629 in all, are:
+= -- 233
+> -- 138
+< -- 3
++ -- 48
+- -- 48
+* -- 225
+:= -- 487
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 56
+chr.to.int$ -- 7
+cite$ -- 7
+duplicate$ -- 97
+empty$ -- 172
+format.name$ -- 55
+if$ -- 495
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 11
+newline$ -- 38
+num.names$ -- 21
+pop$ -- 61
+preamble$ -- 1
+purify$ -- 59
+quote$ -- 0
+skip$ -- 71
+stack$ -- 0
+substring$ -- 120
+swap$ -- 7
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 34
+warning$ -- 0
+while$ -- 16
+width$ -- 0
+write$ -- 90
