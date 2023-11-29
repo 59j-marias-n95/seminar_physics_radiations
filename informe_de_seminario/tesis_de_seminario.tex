@@ -1,20 +1,47 @@
 \documentclass[12pt,letterpaper, oneside]{book}
+\usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
+
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{physics}
+
 \usepackage{graphicx}
+\usepackage{appendix}
+\renewcommand{\appendixname}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\renewcommand{\appendixpagename}{Anexos}
+
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+	\lhead{}
+	\fancyhead[R]{}
+	\fancyhead[L]{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot{}
+}
+
+\pagestyle{fancy}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot{}
+
 \usepackage{tikz}
 \usetikzlibrary{calc}
-\usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
+
 \author{J. Moisés Arias}
 \title{Obtención de un modelo de supervivencia celular desde primeros principios físicos}
-\begin{document}
-		
-	
+\decimalpoint
 
+\begin{document}
 	\begin{titlepage}
 		
 		\begin{tikzpicture}[remember picture, overlay]
@@ -52,13 +79,396 @@
 			\large{\textbf{Obtención de un modelo de supervivencia celular ante radiación ionizante desde primeros principios físicos}}
 			\vspace{0.75cm}
 			
-			\large Supervisor: M.Sc. Ángel Velázquez\\
+			\large Supervisor: M.Sc. Ángel Velásquez\\
 			Departamento: Gravitación, Radiación y Altas Energías
-			
 		\end{center}
 	\end{titlepage}
 	
 	\tableofcontents
 	
+	\chapter*{Introducción}
+	\addcontentsline{toc}{chapter}{Introducción}
+	
+	\chapter*{Objetivos}
+	\addcontentsline{toc}{chapter}{Objetivos}
+	
+	\section*{Objetivo general}
+	\begin{itemize}
+		\item Determinar un modelo teórico desde primeros principios Físicos y Matemáticos sobre la supervivencia celular en tejidos enfermos y sanos ante la interacción con una fuente radiactiva en tratamientos terapéuticos contra el cáncer en general.
+	\end{itemize}
+	\section*{Objetivos específicos}
+	\begin{itemize}
+		\item Emplear métodos matemáticos propios de la Física y el análisis estadístico en la obtención de un modelo teórico de supervivencia celular en radioterapias. 
+		\item Implementar principios termodinámicos, electrodinámicos, nucleares y mecánico-cuánticos para la descripción cuantitativa de la respuesta celular y tisular a la radiación. 
+		\item Simular computacionalmente las respuestas de un tejido a la radiación mediante la evaluación funcional del modelo. 
+		\item Comparar los resultados teóricos con los registros experimentales disponibles en la literatura biomédica. 
+	\end{itemize}
+	
+	\chapter{Fundamentos físico-biomédicos y alcances de la radiobiología}
+		%empezar comentando qué es la radiobiología y cuál es su alcance. 
+		\section{Cronología de la radiobiología} %Radiobiology for the radiologist
+		La Física y la Biología han crecido una de la mano de la otra desde el siglo pasado de forma acelerada. A esta conjunción [de Física y Biología] le llamamos \textit{Radiobiología} y consiste en el estudio de la acción de las radiaciones ionizantes en los seres vivos\cite{Hall.2000}. 
+		
+		Las radiaciones han sido vistas como una amenaza a la vida debido a graves catastrofes que se han suscitado en el pasada a raíz de la ignorancia sobre su naturaleza\cite{Prasad.1995}. No obstante, con el paso del tiempo se ha descubierto una serie de invaluables beneficios a la calidad de vida que yacen en el uso prudente y mesurado de las radiaciones. Estos van desde tratamientos médicos, medidas de seguridad en la ocupación médica y el tratamiento de alimentos para su preservación\cite{Prasad.1995}. 
+		
+		Los registros muestran que los primeros intentos formales por documentar los efectos de la radiación en el tejido vivo desde 1896 al margen del descubrimiento de los rayos X y la radiactividad\cite{Hall.2000}. Este trabajo consistió en el reporte de quemaduras en la piel, irradiación ocular y pérdida de vello. 
+		
+		Podemos recorrer una breve cronología del desarrollo de la radiobiología contemplando algunos de los más grandes hitos en las Ciencias de las Radiaciones. \textit{Hall} ofrece una breve línea temporal de la que se muestran en la tabla \ref{cronologia_radiaciones} algunos eventos relevantes para la discusión en esta tesis
+		
+		\begin{longtable}{rl}
+			\hline
+			1896 & \makecell[l]{Documentados los primeros efectos de los rayos X en forma de quemaduras y\\ depilación.}\\\hline
+			1903 & \makecell[l]{Bergonie y Tribondeau presentan una \textit{ley} sobre radiosensibilidad con base en\\ actividad mitótica.\\ Se plantea por primera vez el uso de implantes de radio para tratar el cáncer.}\\ \hline
+			1911 & \makecell[l]{Se reportan 5 trabajadores de las radiaciones afectados de leucemia.}\\\hline
+			1915 & \makecell[l]{La \textit{Sociedad Británica Roentgen} hace propuestas para protección radiológica.}\\\hline
+			1923 & \makecell[l]{Eugene Petry descubre el \textit{efecto oxígeno} con raíces de plantas.}\\\hline
+			1927 & \makecell[l]{Se observan las primeras mutaciones por radiación en \textit{Drosophila.}}\\\hline
+			1928 & \makecell[l]{Reportada la superioridad del tratamiento fraccionado para el cáncer humano.\\ Se Establece un Comité Internacional en Rayos X y Protección contra el Radio.}\\\hline
+			1930 & \makecell[l]{Primera curva de supervivencia para bacterias expuestas a radiación.}\\\hline
+			1933 & \makecell[l]{Se postula la importancia del oxígeno en la radioterapia por las observaciones\\ de sus efectos en la radiosensibilidad celular.}\\\hline
+			1935 & \makecell[l]{Oficialmente se postula la importancia del oxígeno para la radioterapia.}\\\hline
+			1940 & \makecell[l]{Propuesta del formalismo \textit{lineal-cuadrático} para la respuesta biológica\\ a la radiación.}\\\hline
+			1952 & \makecell[l]{Se publica la primera medición del efecto oxígeno.}\\\hline
+			1956 & \makecell[l]{Primera curva de supervivencia para radiación \textit{in vitro} en células de mamíferos.}\\\hline
+			1959 & \makecell[l]{Primera curva de supervivencia \textit{in vivo} para células tumorales.}\\\hline
+			1960 & \makecell[l]{Cambio de la forma de la curva de supervivencia debido a LET.}\\\hline
+			1963 & \makecell[l]{Primera observación de variaciones en radiosensibilidad a través del\\ ciclo celular.\\ Primera demostración de que las células hipóxicas limitan la curabilidad\\ en tumores.}\\\hline
+			1967 & \makecell[l]{Primera curva de supervivencia celular en cultivos de piel \textit{in vivo}}\\\hline
+			1968 & \makecell[l]{Se da una clasificación de radiosensibilidad tisular.}\\\hline
+			1971 & \makecell[l]{Primera curva de supervivencia celular para hipertermia.\\ Curva de supervivencia para médula ósea.\\Sensibilidad al calor a través del ciclo celular.}\\\hline
+			1980 & \makecell[l]{Se publica la diferencia en la forma de curvas de supervivencia en tejidos\\ temprana y tardíamente responsivos.}\\\hline
+			1981 & \makecell[l]{Se estiman los efectos hereditarios de la radiación en humanos.}\\\hline \caption{Breve cronología de algunos eventos singulares que marcaron hitos en el desarrollo de la radiobiología como punto de convergencia entre la Física y la Biomedicina. Los eventos son transcritos desde \cite{Hall.2000}.}	\label{cronologia_radiaciones}	
+		\end{longtable}
+		
+		Hacia el año de 1897 ya se utilizaban los rayos X de Roentgen en medicina diagnóstica y en el tratamiento de anormalidades cutáneas, como la remoción de berrugas\cite{Hall.2000}. 
+		
+		El primer experimento radiobiológico registrado se debe a Becquerel cuando dejó descuidadamente un contenedor de radio en sus bolsillos; éste dejó un eritema en la zona de contacto que tardó varias semanas en sanar\cite{Hall.2000}. 
+		
+		Los efectos de la radiación fueron estudiados de inmediato por los Curie, quienes deliberadamente se provocaron quemaduras en sus brazos para observar el impacto de las sustancias radiactivas en el tejido vivo\cite{Hall.2000, Prasad.1995}. 
+		
+		No solo los descubrimientos en Física han representando un avance significativo en la Radiobiología. El desarrollo de la Biología en cuanto al conocimiento del ciclo celular y las características en sus etapas, ha abierto las puertas a comprender los mecanismos de radiosensibilidad en la materia viva\cite{Prasad.1995}. Los logros en el cultivo de tejido vivo \textit{in vitro} y los experimentos \textit{in vivo}, así como los estudios genéticos y celulares y bioquímicos han nutrido en gran medida las teorías radiobiológicas\cite{Prasad.1995}. 
+		
+		\section{Modelos de supervivencia celular}
+		%comentar qué modelos existen actualmente para estos procesos y qué los motiva
+		%Complementar con capítulo 4 sección 1 de Introduction to Radiobiology
+		Sabemos que las células menos especializadas son más propensas a los efectos de la radiación, así mismo, los tejidos en crecimiento son más sensibles a dichos efectos\cite{Prasad.1995}.
+				
+		La \textit{radioterapia} juega un rol muy importante en el cuidado del cáncer y constituye en sí misma una disciplina de rápida evolución\cite{Mayles.2007}. Es en el contexto de la radioterapia que surge el interés por conocer el comportamiento de las células al absorber la energía transportada en las radiaciones\cite{Mayles.2007}. 
+		
+		En general el proceso mediante el cual las células captan la energía radiativa es más bien aleatorio, pues la deposición de la radiación se suscita a lo largo de trayectorias o recorridos sujetos a una medida de probabilidad por la inherencia cuántica de las interacciones de la radiación con la materia\cite{Mayles.2007}. 
+		
+		Para entender las tasas de supervivencia celular durante una terapia radiológica, es preciso comprender los mecanismos físicos y biológicos implicados en la deposición/absorción de energía por los tejidos. Este problema es, en fundamento, uno de interacciones de la radiación con la materia donde la termodinámica, mecánica cuántica y electrodinámica desempeñan un papel central. 
+			
+		Se define como muerte celular para células diferenciadas no-proliferantes al evento en el que la célula pierde su funcionalidad\cite{Hall.2000, Tubiana.1990}; para células proliferantes, la muerte celular ocurre cuando la célula pierde su integridad reproductiva\cite{Hall.2000, Tubiana.1990}. 
+		
+		A la luz de estas dos definiciones, se contempla que una célula cualquiera \textit{muere}, o experimenta citólisis, cuando pierde la capacidad de tener una descendencia indefinida\cite{Hall.2000, Tubiana.1990}. La \textit{teoría de objetivos} muestra que una célula precisa experimentar un mínimo número de golpes o eventos dañinos en el tratamiento antes de perder su integridad reproductiva\cite{Bleehen.2007}. 
+		
+		Los mecanismos de muerte celular pueden ser diversos. La \textit{apoptosis} es una forma de \textit{muerte programada}; mientras que la \textit{muerte mitótica} sucede cuando la célula pretende dividirse, mas no lo logra \cite{Hall.2000, Tubiana.1990}. 
+		
+			\subsection{Curva de supervivencia celular} %Radiobiology for the radiologist
+			%Complementar con capítulo 4 sección 2 y 3 de Introduction to Radiobiology			
+			Una \textit{curva de supervivencia celular} [CSC] describe la relación entre la dosis de radiación y la razón de células que no mueren bajo tal dosis\cite{Hall.2000, Tubiana.1990}. Esta se puede modelar para células \textit{in vivo} e \textit{in vitro}. Empero, cabe señalar que no es fácil deducir el comportamiento \textit{in vivo} de las células a partir de su respuesta a la dosis observada \textit{in vitro}\cite{Tubiana.1990}. 
+			
+			\textit{In vivo}, se espera que bajo la dosis correcta el número de células clonogénicas se vea reducido significativamente; decimos que el tumor o tejido enfermo se encuentra [localmente] bajo control\cite{Tubiana.1990}. 
+			
+			La obtención de CSC para tejido \textit{in vivo} es más lenta y cara, además de depender de una serie de hipótesis sobre el sistema; pues las observaciones son indirectas (registros de reacciones histológicas o respuestas tumorales)\cite{Tubiana.1990}.
+			
+				\subsubsection{La forma de una CSC}
+				En general, una CSC puede mostrar uno de tres perfiles: exponencial con hombro, exponencial sin hombro o continuamente descendente con la dosis\cite{Bleehen.2007}. 
+				
+				La aparición de un hombro en la CSC sugiere un proceso de acumulación de daño durante el tratamiento radiativo\cite{Bleehen.2007}. La explicación de este hombro nace en la \textit{teoría de la reparación}. Durante el proceso de irradiación, las células pueden recibir daños subletales (estos son aquellos eventos surgidos por debajo del mínimo de golpes requerido para la muerte celular) y son capaces de recuperarse de tal daño\cite{Bleehen.2007}. A veces, el proceso de recuperación celular se satura a medida que las lesiones aumentan con la dosis; en este sentido, la pendiente de la CSC refleja la inducción de daños irreparables antes de que se sature la recuperación celular y la inducción de lesiones en la ausencia de reparación, después\cite{Bleehen.2007}. 
+				
+				La radioterapia fraccionada ensayada \textit{in vitro} muestra que la capacidad de reparación se debilita con el número de fracciones aunque los ensayos de supervivencia \textit{in vivo} muestran lo contrario\cite{Bleehen.2007}. Esto supone que el medio inmediato al tumor cumple una función dentro de su proceso de reparación, es deseado poder introducir esos efectos como parte de un modelo matemático de supervivencia celular.
+				
+				Describir cualitativamente una CSC suele ser tarea simple, pero dar una explicación biológica de las observaciones representadas en ella en términos biofísicos es otra historia\cite{Hall.2000}. Muchos modelos biofísicos han sido propuestos, así como teorías al lado de ellos, para explicar la forma de la CSC en mamíferos y casi todos logran ajustarse a los datos experimentales, pero nunca es posible elegir uno solo para representar el fenómeno en cuestión\cite{Hall.2000}.
+				
+				Algunas pautas simples para leer una CSC\cite{Hall.2000} son:
+				\begin{enumerate}
+					\item El eje horizontal es típicamente reservado para la dosis.
+					\item El eje vertical es típicamente reservado para la $sf$ en una escala logarítmica.
+					\item Las radiaciones con baja LET, muestran un comportamiento exponencial, inicialmente, hasta doblarse con el incremento de la dosis antes de mostrar una curva exponencial otra vez. 
+					\item Las radiaciones con alta LET, muestran un comportamiento exponencial en todo su rango casi desde el inicio.
+				\end{enumerate}
+
+			\subsection{Métodos de medición de la tasa de células supervivientes}
+				\subsubsection{CSC \textit{in vitro}.}
+				Una prueba de viabilidad \textit{in vitro} es posible a varios grados de dificultad para la mayoría de células clonogénicas animales y humanas\cite{Tubiana.1990}. 
+				
+				Una CSC se construye a partir de la pérdida de la capacidad de replicación celular como una función de la radiación absorbida por el tejido vivo o dosis\cite{Hall.2000}. 
+				
+				Las técnicas modernas permiten realizar cultivos celulares \textit{in vitro} a partir de tumores o cualquier tejido celular regenerativo  mediante una suspensión con la encima tripsina\cite{Hall.2000}. Se conoce como tripsinización al proceso mediante el cual se disuelve la membrana celular por acción de la tripsina\cite{Tubiana.1990, Hall.2000}. 
+			
+				El método descrito por \textit{Tubiana et al} consiste en cultivar en condiciones bien definidas una muestra de células extraídas de una zona enferma y contabilizar las colonias a las que da lugar en su confinamiento. Como una medida para sostener la proliferación, cada ciertos días se retiran algunas colonias de la superficie del recipiente, se diluyen y re-implantan en otro frasco. Estas se llaman \textit{líneas celulares estables} y juegan un rol fundamental en radiobiología\cite{Hall.2000}.
+			
+				La población de células ahora puede ser irradiada en fase exponencial o en fase estacionaria, exclusive. En el primer caso, las células proliferan exponencialmente en el medio de cultivo; mientras que en el segundo caso las células se multiplican hasta ya no poder y entran en una fase de reposo\cite{Tubiana.1990}. 
+			
+				Después de la irradiación, las colonias presentan una reducción. Y es posible contabilizar el número de colonias presentes en el frasco, su razón con respecto a las colonias originales dan la fracción de supervivencia, $S$\cite{Tubiana.1990, Hall.2000}. 
+			
+				El experimento se realiza sobre un número conveniente de cultivos, de manera que pueda trazarse una CSC como una nube de dispersión\cite{Tubiana.1990, Hall.2000}. En el laboratorio se debe ajustar el número de células implantadas de manera que resulte un conjunto contable de colonias; muy pocas no serían estadísticamente significativas y demasiadas devolverían incertidumbres importantes por la agrupación de las colonias\cite{Hall.2000}.
+				
+				La \textit{eficiencia de las placas}, $pe$, es una medida que permite determinar el porcentaje de células sembradas que se convierten en colonias, este parámetro está sujeto a errores sistemáticos de tipo ambiental e instrumental\cite{Hall.2000} y está dado por la siguiente expresión
+				
+				\begin{equation}
+					pe=\frac{\textrm{Número de colonias contadas}}{\textrm{Número de colonias sembradas}}\times 100
+				\end{equation}
+				
+				Se utiliza este factor para estimar cuántas células darán lugar a colonias durante el cultivo\cite{Hall.2000}, este número es más significativo en el cómputo de las tasas de supervivencia que el número de células implantadas.
+				
+				\textit{Hall} presenta una fórmula general para la fracción de supervivencia, $sf$, como:
+
+				\begin{equation}
+				sf=\frac{\textrm{Número de colonias contadas}}{\textrm{Número de células sembradas $\times (pe/100)$}}
+				\end{equation}
+				
+				Con todo este proceso de obtención de la CSC ignora el tipo de muerte celular, mitótica o programada\cite{Hall.2000}. Es una pregunta natural la cuestión de construir un modelo matemático que contemple la tasa de supervivencia celular en el contexto de la muerte durante mitosis o apoptosis. 
+				
+				\subsubsection{CSC \textit{in vivo}.}
+				La supervivencia celular puede verse influenciada por las condiciones experimentales, las cuales difieren de un cultivo \textit{in vitro} a uno \textit{in vivo}\cite{Tubiana.1990}. \textit{In vivo}, el contacto entre células cumple con un rol regenerativo mucho más apreciable que en las células \textit{in vitro}\cite{Tubiana.1990}. 
+				
+				La supervivencia de las células malignas puede medirse a partir de su capacidad para inducir tumores o colonias metásticas\cite{Tubiana.1990}. Estudios \textit{in vivo} se han realizado con frecuencia en colonias intestinales y bazales\cite{Tubiana.1990}. 
+				
+				\paragraph{CSC en leucemia mediante disolución \newline}
+				Históricamente, la primera CSC \textit{in vivo} fue concebida mediante la \textit{técnica de disolución} para un caso de leucemia linfocítica espontánea\cite{Tubiana.1990}. 
+				
+				El procedimiento descrito por \textit{Tubiana et al, 1990} consiste en preparar una suspensión de células individuales del tumor de origen e inyectarlas en diferentes grupos de animales. Se debe estimar el número de células sin irradiar que deben inyectarse para provocar un tumor en el 50\% de los ejemplares; este parámetro es denotado como TD50 y depende de la tasa de células clonogénicas en la suspensión y la efectividad del sistema inmune del receptor. Por último, la CSC [de las células malignas] se construye del aumento del TD50 a medida que la dosis aumenta previo a la extracción del tumor.   
+				
+				\paragraph{CSC en células hematopoyéticas totipotentes \newline}
+				\textit{Tubiana et al, 1990,} comentan que esta técnica fue diseñada por Till y McCulloch tomando células de médula ósea de ratones e inyectarlas en especímenes previamente irradiados con 9Gy de dosis. La intención de administrar tal dosis es provocar la muerte de casi todas las células hematopoyéticas de la zona irradiada sin inducir síndrome gastrointestinal en el paciente. Las células donadas entran al paciente por vía intravenosa y se acumulan en el bazo, donde ocuparán los sitios de las células antes irradiadas y formarán nódulos apreciables a simple vista. 
+				
+				Los nódulos son colonias o la progenie de las células totipotentes donadas y su tamaño es proporcional al número de células totipotentes inyectadas (medido en \textit{unidades formantes de colonias}, $CFU$). 
+				
+				La CSC [para las células totipotentes] se obtiene al irradiar al donante o a la suspensión de células por inyectar en una serie de dosis creciente. 
+				
+				\paragraph{CSC en criptas intestinales \newline}
+				El procedimiento desarrollado por Withers y Elkind, consiste en irradiar totalmente o solo el abdomen de ratones con una dosis de 10 Gy a 15 Gy para matar una cantidad grande de células de las criptas intestinales. De 3 a 5 días después, los especímenes son sacrificados para contabilizar las criptas regeneradas en el yeyuno\cite{Tubiana.1990}. 
+			
+			\subsection{Los principales modelos de CSC}
+			La supervivencia celular ante la radiación ionizante presenta formas gráficas distintas según el tipo de célula modelada\cite{Tubiana.1990}. Múltiples factores pueden influir en la dinámica de la dosis absorbida y sus efectos en el tejido tales como la fase del ciclo celular, la función de la célula y el reino biológico al que pertenece el ejemplar\cite{Tubiana.1990}.
+			
+			Las tasas de supervivencia que se muestran a continuación son empleadas bajo condiciones de referencia que involucran rayos X o gamma en dosis únicas cortas bajo condiciones bien oxigenadas. 
+			
+			\subsubsection{Curvas exponenciales de supervivencia}
+			En mamíferos, las CSC muestran un comportamiento exponencial en el que es apreciable un hombro, por lo general se grafican en escalas logarítmicas o semilogarítmicas para dejar ver el comportamiento lineal con la dosis\cite{Mayles.2007, Tubiana.1990}. 
+			
+			Un modelo exponencial típico es el de la forma
+			
+			\begin{eqnarray}
+			S(D)=e^{-\alpha D}=e^{-D/D_0} \label{exponencial_csc_dosis_lineal}
+			\end{eqnarray}
+			
+			Con $D_0=1/\alpha$ como una \textit{dosis letal media}, que representa la cantidad de energía por unidad de masa a la cual la $sf=e^{-1}=37\%$; también se le denota por $D_{37}$\cite{Tubiana.1990} tal como se hace con las dosis para lograr una supervivencia del 90\% y del 50\%, $D_{90}$ y $D_{50}$ respectivamente\cite{Mayles.2007}. La tasa de supervivencia en escala logarítmica prueba ser una función lineal de la dosis $D$:
+			
+			\begin{eqnarray}
+				\log(S) = -\alpha D=-D/D_0 \label{logaritmica_csc_dosis_lineal}
+			\end{eqnarray}
+			
+			En las células de mamíferos, la CSC puede presentar un hombro que con el aumento de la dosis desaparece para dar lugar a una curva lineal. La extrapolación de dicha línea hacia las ordenadas da lugar a un \textit{número de extrapolación} $n$\cite{Tubiana.1990}. El valor de dosis que corresponde en las abscisas a la intersección de la extrapolación con $S=1.00$ se le denota como $D_q$ y recibe el nombre de \textit{dosis cuasi-umbral}\cite{Tubiana.1990}.  
+			
+			\subsubsection{Curvas de supervivencia dadas por teoría objetivo}
+			En el marco de la teoría objetivo, la supervivencia celular está sujeta a la eventualidad de un golpe letal. El número de tales golpes letales ve un aumento con la dosis, significando una probabilidad mayor de muerte celular tras $N$ eventos\cite{Tubiana.1990, Hall.2000}.
+			
+			Visto de esta forma la tasa de supervivencia está sujeta a la razón de eventos letales por número de células, $p$:
+			
+			\begin{eqnarray}
+				S=e^{-p} \label{exponencial_csc_golpesletales}
+			\end{eqnarray}
+			
+			Al igual las ecuaciones \ref{exponencial_csc_dosis_lineal} con \ref{exponencial_csc_golpesletales} se puede verificar que $1/D_0$ corresponde a un valor de $p/D$\cite{Tubiana.1990}.
+			
+			De acuerdo con \textit{Tubiana et al, 1990}, se debe entender que una célula contiene $n$ objetivos los cuales pueden ser desactivados por el tránsito de una partícula cargada; la desactivación de $n-1$ objetivos se corresponden con una serie de eventos subletales y el enésimo evento, el letal, desata la muerte celular. 
+			
+			Para un escenario muerte celular por un sólo golpe en múltiples objetivos, la tasa de supervivencia se calcula en función de la dosis sujeta a un parámetro de objetivos precisados para un evento letal:
+			
+			\begin{equation}
+			S(D,n)=1-\left(1-e^{-D/D_0}\right)^n \label{csc_eventos_dosis}
+			\end{equation}
+			
+			La función dada en \ref{csc_eventos_dosis} sugiere que la probabilidad de que un objetivo padezca daño es $1-e^{-D/D_0}$ y la probabilidad de dañar a $n$ objetivos en una célula, y por ende matarla, está dada por $(1-e^{-D/D_0})^n$\cite{Tubiana.1990}. Al número $D_0$ se le puede asimilar como la radiosensibilidad de $n$ objetivos subletales por célula\cite{Mayles.2007, Tubiana.1990}.  
+			
+			Por otra parte, un modelo exponencial cuadrático en la dosis es empleado para describir tasas de supervivencia en dinámicas de dos golpes en un objetivo singular\cite{Tubiana.1990}. El modelo es como sigue
+			
+			\begin{equation}
+				S(D)=e^{-\beta D^2} \label{csc_dos_golpes}
+			\end{equation}
+			
+			El parámetro $\beta$ está asociado a la probabilidad de producir un evento subletal\cite{Bleehen.2007, Tubiana.1990}. Los modelos en las ecuaciones \ref{csc_dos_golpes} y \ref{csc_eventos_dosis} funcionan bien para dosis relativamente altas, no así para dosis bajas ya que sus gráficas presentan una nula pendiente inicial sugiriendo cero mortalidad a pequeñas dosis\cite{Tubiana.1990}.  
+			
+			Un modelo a dos componentes surge de suponer los modos de muerte celular como eventos independientes, dando que la probabilidad de supervivencia $S(D)$ es el producto de \ref{logaritmica_csc_dosis_lineal} y \ref{csc_eventos_dosis}\cite{Tubiana.1990}, esto es
+			
+			$$S(D)=S_1S_n$$
+			
+			Donde 
+			
+			$$S_1=e^{-D/_1D_0}$$
+			
+			es la fracción de supervivencia para eventos letales de golpe singular y el coeficiente $_1D_0$ se relaciona a la probabilidad de una lesión letal directa. Y el factor
+			
+			$$S_n=1-(1-e^{-D/_nD_0})^n$$
+			
+			denota la fracción de supervivencia bajo la acumulación de eventos subletales con $_nD_0$ como coeficiente de producción de lesiones subletales. 
+			
+			La expresión resultante es:
+			
+			\begin{equation}
+				S(D)=e^{-D/_1D_0}\left[1-(1-e^{-D/_nD_0})^n\right]\label{csc_onehitlethal_nsublethal}
+			\end{equation}
+			
+			Una expresión alternativa, es el modelo lineal cuadrático
+			
+			\begin{equation}
+				S(D)=e^{-(\alpha D + \beta D^2)}\label{csc_linear_quadratic_model}
+			\end{equation}
+			
+			Los coeficientes $\alpha$ y $\beta$ de la ecuación \ref{csc_linear_quadratic_model} se relacionan, respectivamente, a los dos modos de muerte celular. 
+			
+			La razón $\alpha/\beta$ da un criterio para su importancia relativa en el proceso\cite{Tubiana.1990}. Un valor alto del índice $\alpha/\beta$ se asocia a una curva [casi] exponencial mientras que los valores bajos corresponden a un hombro ancho en la curva\cite{Tubiana.1990}, esto es, la ocurrencia de una acumulación de daño.
+%			\subsection{Relaciones de dosis-respuesta para tejidos normales modelo}%Radiobiology for the radiologist			
+			
+%			\subsection{Respuesta clínica de tejidos normales} %Radiobiology for the radiologist
+			
+%			\subsection{Sistemas tumorales modelo} %Radiobiology for the radiologist
+			
+%			\subsection{Cinética tumoral, histológia y celular} %Radiobiology for the radiologist
+			%Complementar con capítulo 5 sección 1 y 2 de Introduction to Radiobiology	
+			%Complementar con capítulo 6 sección 1, 2 y 3 de Introduction to Radiobiology	
+			
+%		\section{Procesos biológicos de interés en las aplicaciones de las radiaciones}
+%			\subsection{Radiosensibilidad y edad celular en el ciclo mitótico} %Radiobiology for the radiologist
+			%Complementar con capítulo 4 sección 4 de Introduction to Radiobiology	
+			
+%			\subsection{Rupturas en cadenas de ADN y aberraciones cromosómicas} %Radiobiology for the radiologist
+			
+			
+%			\subsection{Recuperación del daño por radiación y la dosis-tasa de afección} %Radiobiology for the radiologist
+			
+%			\subsection{Células hipóxicas y su importancia en radioterapia} %Introduction to Radiobiology	
+						
+		\section{Efectos de las radiaciones en el tejido vivo}
+		Cuando una célula conserva su integridad reproductiva a pesar de la dosis, puede producir una colonia (gran número de clones); a estas células se les llama \textit{clonogénicas}\cite{Hall.2000}.
+		
+		Una célula se considera viable o superviviente cuando, después de la irradiación, es capaz de generar un clon (o colonia) de 50 células o más\cite{Tubiana.1990}.
+		
+		Con base en la jerarquía celular encontramos a las células que conforman aquellos sistemas tisulares \textit{sanos} como restauradoras del cuerpo\cite{Mayles.2007}. Las células responsables de provocar carcinomas son precisamente derivadas de esa clase de tejidos; tales estructuras mantienen muchas de las propiedades de los tumores no-diferenciados\cite{Mayles.2007}. 
+		
+		La radiación se deposita en el tejido vivo mediante interacciones de las partículas constituyentes de las emisiones radiantes con los bloques estructurales de la materia [átomos y moléculas]\cite{Hall.2000, Tubiana.1990, Mayles.2007}.
+		
+		
+		\subsection{Mecanismos de muerte celular} 
+		Existe una cantidad abundante de evidencia, aunque circunstancial, por la cual sostener que la mayor sensibilidad a la radiación yace en el núcleo celular en vez del citoplasma\cite{Bleehen.2007, Hall.2000}. 
+		
+		El ADN contenido en los cromosomas es el objetivo principal para conseguir una letalidad radio-inducida, de acuerdo con múltiples estudios experimentales\cite{Hall.2000, Mayles.2007}. El daño se suscita mediante rupturas de las cadenas de ADN, las cuales pueden ser reparadas por una variedad de encimas\cite{Bleehen.2007}.			
+		
+		Los mecanismos de muerte celular conocidos son la apoptosis o muerte celular programa y la muerte mitótica. 
+		
+			\subsubsection{Apoptosis}
+			La apoptosis es dependiente del tipo de célula; algunas presentan una mayor disposición a padecerla y en algunas otras no ocurre en lo absoluto\cite{Hall.2000}.
+			
+			Se ha reconocido que el proceso consiste en un aislamiento de la célula con respecto a sus vecinas acompañado por una fragmentación de su ADN cromosómico\cite{Hall.2000}. 
+			
+			A continuación, la célula se encoje y se divide en partes pequeñas portadores de citoplasma o fragmentos del núcleo o ambas limitadas por una membrana\cite{Hall.2000}.
+			
+			\subsubsection{Muerte mitótica}
+			Esta es tan importante como la apoptosis y para ciertas células es el único canal por el cesan sus funciones\cite{Hall.2000}. La muerte mitótica es la razón principal por la cual el daño se manifiesta en diferentes momentos para diferentes tejidos\cite{Bleehen.2007}. 
+			
+			La célula muere cuando intenta dividirse, pero no lo logra debido a la fragmentación de su ADN\cite{Hall.2000, Bleehen.2007}. A bajas dosis, la célula puede dividirse hasta un par de veces antes de morir; son las altas dosis las que generan el daño más severo\cite{Bleehen.2007}. 
+			
+			Las aberraciones cromosómicas juegan un rol importante en este evento y su inducción por radiación tiene una medida de probabilidad dependiente de la dosis\cite{Hall.2000}. 
+			
+			Los efectos de la radiación a nivel del núcleo celular se ven reflejados en el modelo lineal-cuadrático. Ambos mecanismos tienen una contribución conjunta en la medición de la supervivencia en función de dosis, $S=S(D)$\cite{Hall.2000}.
+			
+		\subsection{Fases celulares y radiosensibilidad}
+		Las células proliferan mediante la mitosis y el intervalo transcurrido entre divisiones sucesivas se llama tiempo del ciclo celular\cite{Hall.2000}. Durante ese período la célula pasa por 4 etapas cíclicas: mitosis, fase $\textrm{G}_1$, síntesis de ADN, $\textrm{G}_2$; donde las fases G conciernen a períodos de aparente inactividad entre los dos eventos mayores\cite{Hall.2000}.
+		
+		Las células en diferentes etapas del ciclo celular presentan distintas respuestas a la radiación\cite{Bleehen.2007, Tubiana.1990}. La fase mitótica se caracteriza por mostrar una gran radiosensibilidad, mientras que lo opuesto sucede en la fase de síntesis de ADN o fase S y en las fases $\textrm{G}_1$ y $\textrm{G}_2$ la radionsesibilidad es intermedia\cite{Bleehen.2007}. 
+		
+		La duración de cada fase del ciclo celular puede variar de un tipo de célula a otra\cite{Hall.2000, Bleehen.2007}. En células donde, por ejemplo, la fase $G_1$ es larga se puede apreciar una radiosensibilidad distinta en diferentes momentos de la fase\cite{Bleehen.2007}.	
+		
+		\subsection{El efecto del oxígeno}
+			El depósito de energía en la materia viva por radiación se da en la producción de radicales libres altamente reactivos; estos reaccionan con oxígeno molecular para formar peróxidos capaces de fijar el daño en una forma letal\cite{Bleehen.2007}.
+			
+			Experimentos han mostrado que el \textit{efecto del oxígeno} es más duradero cuando el medio intracelular es privado de tioles\cite{Bleehen.2007}. En este sentido, se ha propuesta que modificar los niveles de tioles en el medio intracelular es una vía para aumentar la sensibilidad de las células a la radiación\cite{Bleehen.2007}. 
+			
+			La respuesta de un tejido a la radiación es altamente dependiente de la presencia de oxígeno\cite{Bleehen.2007, Mayles.2007}; las células hipóxicas pueden ser hasta 3 veces menos sensibles a la radiación que sus contrapartes oxigenadas\cite{Bleehen.2007}. 
+			
+			La forma de la CSC para una muestra de tejido mamífero puede variar dependiendo de la proporción de oxígeno presente en la muestra\cite{Bleehen.2007, Mayles.2007, Tubiana.1990}; los análisis experimentales detrás de la obtención de CSC mediante regresiones de $sf-versus-dosis$ muestran que la hipoxia puede ralentizar severamente el progreso de la tasa de supervivencia con el aumento de la dosis. Para ilustrarlo, \textit{Mayles et al, 2007} usa una gráfica comparativa de los efectos del oxígeno en $S(D)$ aquí presentada en la figura \ref{oxic_hypoxic_sc_Mayles2007}
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[scale=0.40]{imagenes/oxic_hypoxic_sc_Mayles2007.png}
+				\caption{Curvas de supervivencia celular dadas como fracción de supervivencia en función de la dosis para células ricas en oxígeno y células pobres en oxígeno. Fuente: \textit{Handbook of Radiotherapy Physics - Mayles et al, 2007}.}\label{oxic_hypoxic_sc_Mayles2007}
+			\end{figure}  
+		
+		La presencia de oxígeno en el medio puede mejorar los efectos de la radiación y esto se aprecia en la reducción de la dosis isoefectiva\cite{Mayles.2007}. Se define la \textit{tasa de mejoramiento por oxígeno}, OER por sus siglas en inglés, como la razón de dosis de radiación en hipoxia con respecto a la dosis en aire necesaria para alcanzar el mismo efecto biológico\cite{Mayles.2007, Smith.2000}. 
+		
+		El efecto del oxígeno, cuantificado por el OER, puede verse magnificado o reducido según el tipo de radiación y el ciclo celular, así como por el LET de la fuente\cite{Hall.2000}. 
+		
+		\subsection{Las 5 R de la radioterapia}
+			Se ha probado experimentalmente que la aplicación fraccionada de la radiación tienen a mejorar el tratamiento\cite{Mayles.2007} y que la optimalidad del tratamiento está sujeto a la habilidad de las células para regenerar daños subletales (SLD) y potencialmente letales (PLD)\cite{Bleehen.2007}. 
+			
+			En la práctica radioterapeútica, se busca no solo reducir el área enferma, sino conseguir, en adición, un daño mínimo en el tejido sano vecino\cite{Mayles.2007}. 
+			
+			Los criterios de selectividad para implementar un tratamiento terapéutico con radiaciones toman en cuenta la distribución de la dosis y los efectos biológicos \textit{espaciales} tanto como \textit{temporales}, al igual que los tiempos de respuesta celular\cite{Mayles.2007}.
+			
+			\textit{Mayles et al, 2007} resume los factores que influencian la respuesta de un tejido neoplástico normal a la radioterapia fraccionada y son conocidos como \textit{las 5 R de la Radioterapia}:
+			
+			\begin{enumerate}
+				\item \textbf{Reparación}: horas después de someterse a radiación ionizante, las células pueden pasar por un proceso de recuperación. 
+				\item \textbf{Re-ordenamiento}: las células supervivientes progresarán hacia una fase resistiva del ciclo celular previo a desarrollar una fase más sensible a la radiación. 
+				\item \textbf{Repoblación}: en el curso de 4 a 6 semanas posteriores a la radioterapia, aquellas células supervivientes pueden dar lugar a nuevas colonias. 
+				\item \textbf{Re-oxigenación}: durante el tratamiento radioterapeútico las células hipóxicas podrán soporta la fracción de radiación. Al aumentar su influjo de oxígeno, se volverán más sensibles a la radiación. 
+				\item \textbf{Radiosensibilidad}: no todas las células responden con el mismo grado de afinidad a la radiación, esto es, diferentes tejidos tienen una tendencia más fuerte a cesar sus funciones (operativas o reproductivas) ante la incidencia de radiación ionizante. 
+			\end{enumerate}
+	
+	
+	\chapter{Marco físico para la determinación de un modelo de supervivencia celular}
+	Debido a que el problema de la supervivencia celular radica en la absorción de energía [ionizante], la construcción de un modelo matemático que considere la dosis como un causante de la reducción del tejido canceroso es, en principio, una cuestión termodinámica. 
+	
+	Los agentes portadores de la radiación ionizantes serían \textit{corpúsculos} u \textit{ondas electromagnéticas}. En el marco de las interacciones de la radiación con la materia, se estudian tanto la incidencia de partículas gobernadas por la mecánica cuántica como la transmisión y absorción de ondas continuas.
+	
+	El \textit{principio de complementariedad} de la mecánica cuántica sostiene que la radiación electromagnética es modelable desde una perspectiva corpuscular. Y así, el logro del objetivo general de este trabajo radica en determinar un modelo de supervivencia [celular] con una ecuación de estado termodinámico-estadística sobre la base de la mecánica cuántica (y la electrodinámica, de encontrárselo oportuno). 
+	
+	Observaciones desde la fisicoquímica y bioquímica serán tomadas en cuenta dentro de las condiciones del modelo, pues estos aspectos gobiernan la naturaleza de la interacción de las radiaciones con la materia viva\cite{Bleehen.2007}. 
+	
+	\section{Interacciones de la radiación con la materia}
+	La radiación corpuscular interactúa de maneras diferentes con la materia según se trate de partículas cargadas o neutras. Factores tales como el rango y la deposición de energía se ven afectados naturalmente. 
+	
+	Para empezar se construirá un modelo para rayos X y rayos $\gamma$. Se precisa formular el problema dentro de la clasificación de radiación ionizante, pues el objetivo es conseguir la tasa de supervivencia ante la absorción de energía suficiente para desdoblar cadenas de ADN. 
+	
+	El proceso de absorción de la energía electromagnética portada por los fotones depende tanto de la energía misma de los fotones y el número atómico del material absorbente\cite{IAEA.2010}. Los efectos biológicos se suscitan debido a la absorción o dispersión de los rayos X o los rayos $\gamma$ en colisiones con los átomos de los tejidos\cite{IAEA.2010, Mayles.2007}. 
+	
+	Los siguientes procesos son los principales mecanismos de transferencia de energía de fotones a materia: absorción fotoeléctrica, dispersión Compton y producción de pares\cite{IAEA.2010}. 
+	
+	En el primer caso, así como el tercero, el fotón desaparece por completo al ceder su energía en la interacción, mientras que en el segundo casa se dispersa incoherentemente\cite{IAEA.2005}.
+	 
+	\section{Modelado diferencial de la fracción de supervivencia}
+	Como primer acercamiento al problema, se propone plantear una ecuación diferencial de la fracción de supervivencia con respecto a la dosis, esto es
+	
+	$$\dv{S}{D}=F(D)$$
+	
+	Teniendo por definición de dosis, $D$, la energía absorbida por el tejido por unidad de masa del tejido, $E_{ab}/m$, entonces
+	
+	$$\dv{S}{(E_{ab}/m)}=m\dv{S}{E_{ab}}=F\left(\frac{E_{ab}}{m}\right)$$
+	
+	Donde $F$ es una función continua y $m$ es una constante. La función $F$ contempla todos los mecanismos ad absorción de energía ionizante por el tejido. En este sentido, es de interés establecer qué procesos físicos son los que ocurren durante la irradiación. Conviene guiar la formulación del proceso según la naturaleza de la radiación, esto es, rayos X, rayos $\gamma$, partículas pesadas, electrones, etc.
+	
+%		\section{La termodinámica y el estudio de la energía}
+%			\subsection{Variables y ecuaciones de estado}
+%			\subsection{La absorción de energía ionizante como proceso termodinámico}
+%		\section{Interacciones de la radiación con la materia como proceso termodinámico}
+	\chapter{Simulación numérica de los modelos de supervivencia celular}
+		
+	\chapter{Conclusiones}
+	
+	\appendix
+	\clearpage
+	\addappheadtotoc
+	\appendixpage
+	
+	\chapter{Formalismo matemático}
+	
+	\chapter{Demostraciones relevantes}
+
+	\bibliography{seminar_bibliography.bib}
+	\bibliographystyle{apalike}
 	
 \end{document}

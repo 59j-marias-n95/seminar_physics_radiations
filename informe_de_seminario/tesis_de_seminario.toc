@@ -1,1 +1,31 @@
 \babel@toc {spanish}{}
+\contentsline {chapter}{Introducción}{2}%
+\contentsline {chapter}{Objetivos}{3}%
+\contentsline {chapter}{\numberline {1}Fundamentos físico-biomédicos y alcances de la radiobiología}{4}%
+\contentsline {section}{\numberline {1.1}Cronología de la radiobiología}{4}%
+\contentsline {section}{\numberline {1.2}Modelos de supervivencia celular}{6}%
+\contentsline {subsection}{\numberline {1.2.1}Curva de supervivencia celular}{6}%
+\contentsline {subsubsection}{La forma de una CSC}{7}%
+\contentsline {subsection}{\numberline {1.2.2}Métodos de medición de la tasa de células supervivientes}{7}%
+\contentsline {subsubsection}{CSC \textit {in vitro}.}{7}%
+\contentsline {subsubsection}{CSC \textit {in vivo}.}{8}%
+\contentsline {paragraph}{CSC en leucemia mediante disolución \newline }{9}%
+\contentsline {paragraph}{CSC en células hematopoyéticas totipotentes \newline }{9}%
+\contentsline {paragraph}{CSC en criptas intestinales \newline }{9}%
+\contentsline {subsection}{\numberline {1.2.3}Los principales modelos de CSC}{9}%
+\contentsline {subsubsection}{Curvas exponenciales de supervivencia}{10}%
+\contentsline {subsubsection}{Curvas de supervivencia dadas por teoría objetivo}{10}%
+\contentsline {section}{\numberline {1.3}Efectos de las radiaciones en el tejido vivo}{12}%
+\contentsline {subsection}{\numberline {1.3.1}Mecanismos de muerte celular}{12}%
+\contentsline {subsubsection}{Apoptosis}{12}%
+\contentsline {subsubsection}{Muerte mitótica}{12}%
+\contentsline {subsection}{\numberline {1.3.2}Fases celulares y radiosensibilidad}{13}%
+\contentsline {subsection}{\numberline {1.3.3}El efecto del oxígeno}{13}%
+\contentsline {subsection}{\numberline {1.3.4}Las 5 R de la radioterapia}{14}%
+\contentsline {chapter}{\numberline {2}Marco físico para la determinación de un modelo de supervivencia celular}{16}%
+\contentsline {section}{\numberline {2.1}Modelado diferencial de la fracción de supervivencia}{16}%
+\contentsline {chapter}{\numberline {3}Simulación numérica de los modelos de supervivencia celular}{18}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{19}%
+\contentsline {chapter}{Anexos}{20}%
+\contentsline {chapter}{\numberline {A}Formalismo matemático}{21}%
+\contentsline {chapter}{\numberline {B}Demostraciones relevantes}{22}%
