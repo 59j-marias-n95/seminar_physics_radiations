@@ -90,6 +90,14 @@
 	\chapter*{Introducción}
 	\addcontentsline{toc}{chapter}{Introducción}
 	
+	Los modelos de supervivencia celular han sido objeto de estudio casi desde el inicio mismo de la radiobiología como una rama de estudio. El impacto de las radiaciones, en particular de las radiaciones ionizantes, en la salud del ser humano como de cualquier otro ser vivo constituyen al día de hoy un tema de arduo debate y gran interés científico. El tema no solo se remite al ámbito médico, donde está de más recalcar su relevancia, sino que afecta también a los ámbitos cotidianos desde el uso de la tecnología del hogar hasta los cuidados de la piel de implacables fenómenos de la naturaleza. 
+	
+	Los modelos de supervivencia celular buscan cuantificar una proporción de células o colonias de células que superan una cierta dosis de energía absorbida durante una interacción con una sustancia radiactiva o una fuente de energía espontánea, en su defecto. Estos modelos se presentan gráficamente como una curva que traza el decaimiento de una fracción de la población celular a medida que la dosis de energía aumenta durante un intervalo de tiempo. 
+	
+	Para fines clínicos, una curva de supervivencia celular dicta la calidad de un tratamiento terapeútico en pos de la tasa a la que se destruye el tejido canceroso mediante la acción de la radiación. Para fines de radioprotección las curvas de supervivencia celular nos pueden dar una pista de cuán riesgoso es permanecer en un espacio donde existe una amenaza radiológica. 
+	
+	Estas ecuaciones, o mejor dicho funciones, se han construido desde datos experimentales y los intentos por obtener un modelo de manera teórica, ya sea de forma heurística o desde primerios principios son virtualmente escasos en la literatura científica. Este trabajo aspira a dar un primer paso hacia la obtención de un modelo teórico o a lo sumo, semi-empírico. 
+	
 	\chapter*{Objetivos}
 	\addcontentsline{toc}{chapter}{Objetivos}
 	
@@ -370,7 +378,7 @@
 			
 			\begin{figure}[h!]
 				\centering
-				\includegraphics[scale=0.40]{imagenes/oxic_hypoxic_sc_Mayles2007.png}
+				\includegraphics[scale=0.50]{imagenes/oxic_hypoxic_sc_Mayles2007.png}
 				\caption{Curvas de supervivencia celular dadas como fracción de supervivencia en función de la dosis para células ricas en oxígeno y células pobres en oxígeno. Fuente: \textit{Handbook of Radiotherapy Physics - Mayles et al, 2007}.}\label{oxic_hypoxic_sc_Mayles2007}
 			\end{figure}  
 		
@@ -394,29 +402,34 @@
 				\item \textbf{Re-oxigenación}: durante el tratamiento radioterapeútico las células hipóxicas podrán soporta la fracción de radiación. Al aumentar su influjo de oxígeno, se volverán más sensibles a la radiación. 
 				\item \textbf{Radiosensibilidad}: no todas las células responden con el mismo grado de afinidad a la radiación, esto es, diferentes tejidos tienen una tendencia más fuerte a cesar sus funciones (operativas o reproductivas) ante la incidencia de radiación ionizante. 
 			\end{enumerate}
-	
+		
+		Idealmente, para construir un modelo teórico exitoso de la supervivencia celular como una función de la dosis, estos procesos biológicos deben incluirse de forma cuantitativa en el cálculo del número o fracción de colonias supervivientes. En ese sentido, se espera que los parámetros representativos de estos fenómenos aparezcan como factores o términos aditivos afectando la medida de dosis. 
+		
+		Cuantificar estos procesos ameritaría reconocer el efecto que tiene la radiación ionizante en las células objetivo en términos de la detención de sus funciones. Lo que requiere identificar la probabilidad de que una célula vea impedida su reproducción o trabajo en el tejido después de una interacción letal con la radiación. 	
 	
 	\chapter{Marco físico para la determinación de un modelo de supervivencia celular}
 	Debido a que el problema de la supervivencia celular radica en la absorción de energía [ionizante], la construcción de un modelo matemático que considere la dosis como un causante de la reducción del tejido canceroso es, en principio, una cuestión termodinámica. 
 	
-	Los agentes portadores de la radiación ionizantes serían \textit{corpúsculos} u \textit{ondas electromagnéticas}. En el marco de las interacciones de la radiación con la materia, se estudian tanto la incidencia de partículas gobernadas por la mecánica cuántica como la transmisión y absorción de ondas continuas.
+	Los agentes portadores de la radiación ionizantes serían \textit{corpúsculos} u \textit{ondas electromagnéticas}. En el marco de las interacciones de la radiación con la materia, se estudian tanto la incidencia de partículas gobernadas por la mecánica cuántica como la transmisión y absorción de ondas electromagnéticas, continuas por naturaleza.
 	
-	El \textit{principio de complementariedad} de la mecánica cuántica sostiene que la radiación electromagnética es modelable desde una perspectiva corpuscular. Y así, el logro del objetivo general de este trabajo radica en determinar un modelo de supervivencia [celular] a partir de la energía deposita en la materia por interacciones con fotones. 
+	El \textit{principio de complementariedad} de la mecánica cuántica sostiene que la radiación electromagnética es modelable desde una perspectiva corpuscular. Y así, el logro del objetivo general de este trabajo radica en determinar un modelo de supervivencia [celular] a partir de la energía deposita en la materia por interacciones con partículas elementales. 
 	
-	Observaciones desde la fisicoquímica y bioquímica serán tomadas en cuenta dentro de las condiciones del modelo, pues estos aspectos gobiernan la naturaleza de la interacción de las radiaciones con la materia viva\cite{Bleehen.2007}. 
+	Observaciones desde la fisicoquímica y bioquímica necesitan ser tomadas en cuenta dentro de las condiciones o forma del modelo; pues estos aspectos gobiernan la naturaleza de la interacción de las radiaciones con la materia viva\cite{Bleehen.2007}. 
 	
-	Los parámetros de atenuación o absorción de la radiación ionizante dependerán de la identidad química de los objetivos además de la magnitud de la energía portada por el haz\cite{Mayles.2007,IAEA.2005}.
+	Los parámetros de atenuación o absorción de la radiación ionizante dependerán de la identidad química de los objetivos además de la magnitud de la energía portada por el haz\cite{Mayles.2007,IAEA.2005,Podgorsak.2016}.
 	
-	De acuerdo con \cite{Mayles.2007} la deposición de energía por radiación en el tejido es, esencialmente, estocástica. Este proceso se desarrolla a través de colisiones con la materia a lo largo de un recorrido de longitud y direcciones aleatorias. Además, \cite{Mayles.2007} advierte que para valores pequeños de la masa del tejido, las fluctuaciones en la absorción se hacen más aparentes; de esta manera, existe una masa crítica a partir de la cual el comportamiento aleatorio del depósito de energía es evidente. 
+	De acuerdo con \cite{Mayles.2007} la deposición de energía por radiación en el tejido es, esencialmente, estocástica. Este proceso se desarrolla a través de colisiones a lo largo de un recorrido de longitud y direcciones aleatorias. Además, \cite{Mayles.2007} advierte que para valores pequeños de la masa del tejido, las fluctuaciones en la absorción se hacen más aparentes; de esta manera, existe una masa crítica a partir de la cual el comportamiento aleatorio del depósito de energía es más evidente a medida que la masa se reduce.
+	
+	Una manera de palear este problema es contemplando valores medios de energías y fluencias energéticas\cite{Mayles.2007, Podgorsak.2016}. De esta manera, los modelos matemáticos pretenden un acercamiento más bien determinista cuyas estimaciones se cotejan bastante bien con la experimentación\cite{Podgorsak.2016}.  
 	
 	\section{Interacciones de la radiación con la materia}
 	La radiación corpuscular interactúa de maneras diferentes con la materia según se trate de partículas cargadas o neutras. Factores tales como el rango y la deposición de energía se ven afectados naturalmente. 
 	
-	Para empezar se construirá un modelo para rayos X y rayos $\gamma$. Se precisa formular el problema dentro de la clasificación de radiación ionizante, pues el objetivo es conseguir la tasa de supervivencia ante la absorción de energía suficiente para desdoblar cadenas de ADN. 
+	Para empezar se construirá un modelo para rayos X y rayos $\gamma$, los cuales se contemplan como formas de radiación con baja LET\cite{Podgorsak.2016}. Se precisa formular el problema dentro de la clasificación de radiación ionizante, pues el objetivo es conseguir la tasa de supervivencia ante la absorción de energía suficiente para desdoblar cadenas de ADN, lo que implica impactos letales\cite{Mayles.2007, Tubiana.1990}. 
 	
-	El proceso de absorción de la energía electromagnética portada por los fotones depende tanto de la energía misma de los fotones y el número atómico del material absorbente\cite{IAEA.2010}. Los efectos biológicos se suscitan debido a la absorción o dispersión de los rayos X o los rayos $\gamma$ en colisiones con los átomos de los tejidos\cite{IAEA.2010, Mayles.2007}. 
+	El proceso de absorción de la energía electromagnética portada por los fotones depende tanto de la energía misma de los fotones como del número atómico del material absorbente o atenuador\cite{IAEA.2010, Mayles.2007}. Los efectos biológicos se suscitan debido a la absorción o dispersión de los rayos X o los rayos $\gamma$ en colisiones con los átomos de los tejidos\cite{IAEA.2010, Mayles.2007}. 
 	
-	Los siguientes procesos son los principales mecanismos de transferencia de energía de fotones a materia: absorción fotoeléctrica, dispersión Compton y producción de pares\cite{IAEA.2010}. 
+	Los siguientes procesos son los principales mecanismos de transferencia de energía de fotones a materia: absorción fotoeléctrica, dispersión Compton y producción de pares\cite{IAEA.2010,Podgorsak.2016}. 
 	
 	En el primer caso, así como el tercero, el fotón desaparece por completo al ceder su energía en la interacción, mientras que en el segundo casa se dispersa incoherentemente\cite{IAEA.2005}.
 	
@@ -426,16 +439,20 @@
 		\mu_{tr}&=\mu \frac{\bar{E}_{tr}}{h\nu}\\
 		\mu_{ab}&=\mu \frac{\bar{E}_{ab}}{h\nu}
 	\end{eqnarray}
+	
+	 \noindent El primer coeficiente, de acuerdo con \cite{Podgorsak.2016}, corresponde a una medida de la transferencia de energía a los electrones (y anti-electrones) en las interacciones fotón-átomo; puede evaluarse independiente de la densidad como un coeficiente de transferencia de energía másico $\mu_{tr}/\rho$. En cuanto al segundo, \cite{Podgorsak.2016} explica que hace referencia a una medida de energía absorbida en el medio y puede independizarse de la densidad como un coeficiente másico de la forma $\mu_{ab}/\rho$. 
+	 
+	 Los términos $\bar{E}_{tr, ab}$ son energía media transferida a las partículas cargadas del atenuador y la energía media depositada por las partículas cargadas en el atenuador\cite{Podgorsak.2016, IAEA.2005}. 
+	
+	 La energía transferida y la energía absorbida, en el sentido de \cite{Podgorsak.2016}, deben entenderse como la energía transferida a la energía cinética de las partículas cargadas con las que interactúan los fotones incidentes y la energía transferida al medio por las partículas cargadas secundarias producidas por la interacción, respectivamente. Por lo tanto, se refieren a dos procesos muy diferentes. 
 	 
 	 En el manual de \cite{IAEA.2005} se define $\mu$ como un factor de atenuación lineal dependiente de la energía del fotón y la especie química. En \cite{Mayles.2007}, el coeficiente de atenuación lineal dicta la probabilidad por unidad de longitud para una interacción y es una función de la sección eficaz atómica total:
 	 
 	 $$\mu=N \sigma_{tot}$$
 	 
-	 Donde el parámetro $N$ dicta el número de entidades objetivos por unidad de volumen. Se define en función de la identidad del atenuador (su número másico, $A$ y densidad, $\rho$):
+	 \noindent donde el parámetro $N$ dicta el número de entidades objetivos por unidad de volumen. Se define en función de la identidad del atenuador (su número másico, $A$ y densidad, $\rho$):
 	 
 	 $$N=\frac{N_A}{A}\rho$$	 
-	 
-	 Los términos $\bar{E}_{tr, ab}$ son energía media transferida a las partículas cargadas del atenuador y la energía media depositada por las partículas cargadas en el atenuador. 
 	 
 	 La intensidad de un haz de fotones mono-energético está dado entonces por:
 	 
@@ -451,13 +468,19 @@
 	 	Z_{eff}=\left[\sum_{i}a_i Z_i^{3.5}\right]^{1/3.5}\label{numero_atomico_efectivo}
 	 \end{equation}
 	 
-	 y para fotones de mega-voltaje y haces electrónicos, se define por
+	 \noindent y para fotones de mega-voltaje y haces electrónicos, se define por
 	 
 	 \begin{equation}
 	 	Z_{eff}=\frac{\sum_{i}a_i \frac{Z_i^2}{A_i}}{\sum_{i}a_i \frac{Z_i}{A_i}}
 	 \end{equation}
 	 
-	 Donde $a_i$ es la fracción de masa del iésimo constituyente, $Z_i$ y $A_i$ corresponden a los números atómico y másico, respectivamente, del iésimo constituyente. 
+	 \noindent donde $a_i$ es la fracción de masa del iésimo constituyente, $Z_i$ y $A_i$ corresponden a los números atómico y másico, respectivamente, del iésimo constituyente. 
+	 
+	 En el caso del coeficiente de atenuación lineal másico, \cite{Mayles.2007} presenta una vía de cálculo directa para sustancias compuestas en términos de los correspondientes coeficientes para sus partes
+	 
+	 $$\mu_m=\sum_{i}\mathcal{W}_i (\mu_m)_i$$
+	 
+	 \noindent donde $\mathcal{W}_i$ es la fracción de masa o moles del iésimo constituyente en el compuesto químico. 
 	 
 	 \subsection{Efecto y absorción fotoeléctricos}
 	 La energía cinética, $E_K$, del electrón expulsado por este proceso (también llamado foto-electrón en la literatura como \cite{IAEA.2005,Mayles.2007}) está dada como:
@@ -466,13 +489,17 @@
 	 	E_K=h\nu - E_B
 	 \end{equation}
 	 
-	 Donde los términos $h\nu$ y $E_B$ corresponden a la energía del fotón y la energía de ligadura del electrón, respectivamente. Existen factores de atenuación importantes en este proceso: en primera instancia aparece el coeficiente de atenuación atómico 
+	 \noindent donde los términos $h\nu$ y $E_B$ corresponden a la energía del fotón y la energía de ligadura del electrón, respectivamente. 
+	 
+	 Existen factores de atenuación importantes en este proceso: en primera instancia aparece el coeficiente de atenuación atómico 
 	 
 	 $$_a\tau \propto \frac{Z^4}{(h\nu)^3}$$
 	 
-	 y en segundo lugar aparece el coeficiente de atenuación másico
+	 \noindent y en segundo lugar aparece el coeficiente de atenuación másico
 	 
 	 $$\tau_m \propto \left(\frac{Z}{h\nu}\right)^3$$
+	 
+	 \noindent También se puede mencionar a un coeficiente de atenuación lineal $\tau=\rho \tau_m$\cite{Podgorsak.2016}. 
 	 
 	 La energía media transferida a los electrones orbitales por efecto fotoeléctrico está dada en función de la energía de ligadura de los electrones de la capa K, $E_B(K)$,:
 	 
@@ -480,7 +507,7 @@
 	 	(\bar{E}_K)^{PE}_{tr} = h\nu - P_K \omega_K E_B(K)\label{energia_cinetica_fotoelectrones}
 	 \end{equation}
 	 
-	 Donde $P_K$ es la fracción de interacciones fotoeléctricas suscitadas a nivel de la capa K, su valor es muy 1.0 para átomos con bajo Z; el factor $\omega_K$ es el \textit{yield} fluorescente de la capa K; siguiendo a \cite{IAEA.2005} y \cite{Mayles.2007} se entiende como el número de fotones característicos o rayos X característicos emitidos por los electrones de la capa K, su valor depende del número atómico. En \cite{IAEA.2005} se dan las siguientes correspondencias aproximadas: $(Z<10,\omega_K=0)$, $(Z\approx 30,\omega_K \approx 0.5)$ y $(\textrm{big }Z,\omega_K=0.96)$. 
+	 \noindent donde $P_K$ es la fracción de interacciones fotoeléctricas suscitadas a nivel de la capa K, su valor es 1.0 para átomos con bajo Z; el factor $\omega_K$ es el \textit{yield} fluorescente de la capa K; siguiendo a \cite{IAEA.2005} y \cite{Mayles.2007} se entiende como el número de fotones característicos o rayos X característicos emitidos por los electrones de la capa K, su valor depende del número atómico. En \cite{IAEA.2005} se dan las siguientes correspondencias aproximadas (presentadas como pares ordenados por comodidad): $(Z<10,\omega_K=0)$, $(Z\approx 30,\omega_K \approx 0.5)$ y $(Z\textrm{ grande},\omega_K=0.96)$. 
 	 
 	 \subsection{Dispersión Compton o incoherente}
 	 La diferencia esencial con el foto-efecto, de acuerdo con \cite{IAEA.2005} recae en el hecho que la energía cinética del fotón incidente es mucho mayor que la energía de ligadura del electrón orbital (significando que la diferencia es de al menos un orden de magnitud). 
@@ -493,64 +520,88 @@
 	 	\Delta \lambda = \lambda_C (1 - \cos(\theta)) \label{ley_compton}
 	 \end{equation}
 	 
-	 donde la constante $\lambda_C$ es la longitud de onda de Compton del electrón
+	 \noindent donde la constante $\lambda_C$ es la longitud de onda de Compton del electrón
 	 
 	 $$\lambda_C=\frac{h}{m_e c}=0.024 \textrm{\AA}$$
 	 
 	 En este proceso se pueden observar fenómenos de atenuación, estos se asocian en primera instancia con un coeficiente de atenuación atómico, $_a\sigma_C$, además de un coeficiente de atenuación electrónico, $_e\sigma_C$, y un coeficiente de atenuación másico, $\sigma_C/\rho$. El primero depende del número atómico Z, mientras que los otros dos no\cite{IAEA.2005}.
 	 
-	 Las energías del electrón reflectado y el electrón dispersado, $h\nu'$ y $E_K$, respectivamente, están dadas por
+	 Las energías del fotón deflectado y el electrón dispersado, $h\nu'$ y $E_K$, respectivamente, están dadas por
 	 
 	 \begin{eqnarray}
 	 	h\nu'&=h\nu \frac{1}{1+\varepsilon(1-\cos(\theta))}\\
 	 	E_K&=h\nu \frac{\varepsilon(1-\cos(\theta))}{1+\varepsilon(1-\cos(\theta))}
 	 \end{eqnarray} 
 	 
-	 Donde el factor $\varepsilon$ corresponde a la energía normalizada del fotón incidente
+	 \noindent donde el factor $\varepsilon$ corresponde a la energía normalizada del fotón incidente
 	 
-	 $$\varepsilon=\frac{h\nu}{m_e c^2}$$
+	 $$\varepsilon=\frac{h\nu}{m_e c^2}.$$
+	 
+	 La energía transferida media es entonces
+	 
+	 \begin{eqnarray}
+	 	\nonumber (\bar{E}_K)_{tr}^{CE}=&\frac{1}{\pi - 0}\int_{0}^{\pi}h\nu \frac{\varepsilon(1-\cos(\theta))}{1+\varepsilon(1-\cos(\theta))}\dd{\theta}\\
+	 	=&h\nu \left(\frac{1+2\varepsilon - \sqrt{1+2\varepsilon}}{1+2\varepsilon}\right)\label{energia_media_transferida_compton}
+	 \end{eqnarray}
+	 
 	 \subsection{Producción de pares} 
-	 El fotón desaparece por completo produciendo en el campo coulombiano nuclear un protón y anti-electrón con energía cinética neta igual a $h\nu - 2m_ec^2$. La energía umbral para la ocurrencia de la producción de pares es $2m_ec^2$, para haces con energía menores que esta la probabilidad de producción de pares es nula\cite{IAEA.2005}. 
+	 El fotón desaparece por completo produciendo en el campo coulombiano nuclear un protón y anti-electrón con energía cinética neta igual a $h\nu - 2m_ec^2$, por lo que la energía transferida media es
 	 
-	 Dos coeficientes de atenuación son importantes en este proceso: el atómico, $_a\kappa$ y el másico, $\kappa/\rho$, los cuales varían en la medida de $Z^2$ y $Z$, respectivamente. 
+	 \begin{equation}
+	 	(\bar{E_K})_{tr}^{PP}=h\nu - 2m_ec^2 \label{energia_media_transferida_prodpares}
+	 \end{equation}
+	 
+	 La energía umbral para la ocurrencia de la producción de pares es $2m_ec^2$, para haces con energía menores que esta la probabilidad de producción de pares es nula\cite{IAEA.2005}. 
+	 
+	 Dos coeficientes de atenuación son importantes en este proceso: el atómico, $_a\kappa$ y el másico, $\kappa/\rho$ o $\kappa_m$, los cuales varían en la medida de $Z^2$ y $Z$, respectivamente. 
 	 
 	 \subsection{Contribuciones a los coeficientes de atenuación}
 	 Dado un haz de fotones con energía $h\nu$ incidente en un atenuador de número atómico Z, los coeficientes de atenuación, transferencia de energía y absorción de energía, de acuerdo con \cite{IAEA.2005} están dados por la suma de los coeficientes individuales de las interacciones observadas.
 	 
-	 Para los tres efectos contemplados hasta ahora, los resultantes coeficientes serían:
+	 Para los tres efectos contemplados hasta ahora, de acuerdo con \cite{Podgorsak.2016} y \cite{IAEA.2005} los resultantes coeficientes serían:
 	 
 	 \begin{align}
-	 	\mu&=\tau + \sigma_C + \kappa\\
-	 	\mu_{tr}&=\tau_{tr} + (\sigma_C)_{tr}+\kappa_{tr}=\tau\frac{\left(\bar{E}_K\right)_{tr}^{PE}}{h\nu} + \sigma_C\frac{\left(\bar{E}_K\right)_{tr}^{CE}}{h\nu} + \kappa \frac{\left(\bar{E}_K\right)_{tr}^{PP}}{h\nu}\\
+	 	\mu&=\tau + \sigma_{CE} + \kappa\\
+	 	\mu_m&=\frac{\mu}{\rho}\\
+	 	_a\mu&=\frac{1}{\rho}\frac{A}{N_A}\mu\\
+	 	\mu_{tr}&=\tau_{tr} + (\sigma_{CE})_{tr}+\kappa_{tr}=\tau\frac{\left(\bar{E}_K\right)_{tr}^{PE}}{h\nu} + \sigma_{CE}\frac{\left(\bar{E}_K\right)_{tr}^{CE}}{h\nu} + \kappa \frac{\left(\bar{E}_K\right)_{tr}^{PP}}{h\nu}\\
 	 	\mu_{ab}&=\mu_{tr}(1-g)
 	 \end{align}
 	 
-	 Donde las energías medias transferidas a las partículas cargadas en las interacciones fotoeléctrica, Compton y producción de pares son $\left(\bar{E}_K\right)_{tr}^{PE}$, $\left(\bar{E}_K\right)_{tr}^{CE}$ y  $\left(\bar{E}_K\right)_{tr}^{PP}$, respectivamente. La fracción de radiación, $g$, está definida como:
+	 \noindent donde las energías medias transferidas a las partículas cargadas en las interacciones fotoeléctrica, Compton y producción de pares son $\left(\bar{E}_K\right)_{tr}^{PE}$, $\left(\bar{E}_K\right)_{tr}^{CE}$ y  $\left(\bar{E}_K\right)_{tr}^{PP}$, respectivamente. La fracción de radiación, $g$, está definida como:
 	 
-	 $$g=\frac{\left(\bar{E}_K\right)_{tr}-\left(\bar{E}_K\right)_{ab}}{\left(\bar{E}_K\right)_{tr}}$$
+	 $$g=\frac{\left(E_K\right)_{tr}-\left(E\right)_{ab}}{\left(E_K\right)_{tr}}$$
+	 
+	 De acuerdo con \cite{Podgorsak.2016} y \cite{IAEA.2005}, el efecto fotoeléctrico es el modo predominante de interacción en los absorbentes con energías de fotón bajas. Mientras que en energías intermedias, predomina el efecto Compton en materiales con bajo número atómico Z. En los tratamientos radioterapeúticos los rangos de energía de fotón intermedia comprende desde $\unit[20]{keV}$ hasta $\unit[20]{MeV}$ y en tejidos y agua es el modo de interacción predominante\cite{Podgorsak.2016}. 
 	 
 	\section{Fundamentos sobre dosimetría de las radiaciones}
 	Se tiene por definición de dosis, $D$, según \cite{Mayles.2007} la energía absorbida media por el tejido por unidad de masa del tejido, su unidad es el \textit{gray} y equivale a $\unit[1]{Jkg^{-1}}$
 	
-	$$D=\dv{(\bar{E})_{ab}}{m}$$
+	$$D=\dv{(E)_{ab}}{m}$$
 	
-	\cite{Mayles.2007} define la energía administrada a un volumen finito $V$ como 
+	La dosis medida de esa forma es más bien una cantidad estocástica, pero se puede contemplar la dosis media como una función de la energía administrada media de acuerdo con \cite{CARLSSON.1999}:
+	
+	\begin{equation}
+		\bar{D}=\frac{\bar{E}}{M}\label{dosis_segun_carlsson}
+	\end{equation}
+	
+	\noindent donde $M$ es la masa del tejido que es irradiado y $E$ es la energía administrada dentro de un volumen finito. \cite{Mayles.2007} define este último  como 
 	
 	\begin{equation}
 	E = \sum E_{entrantes} - \sum E_{salientes} + \sum Q\label{energia_administrada}
 	\end{equation}
 	
-	donde el primer término toma en cuenta la energía de todas las partículas que ingresan al volumen, el segundo término contempla la energía de las partículas que abandonan el volumen y el tercer término acumula todos los cambios en las energías en reposo de las partículas elementales involucradas en cualquier transformación nuclear. 
+	\noindent donde el primer término toma en cuenta la energía de todas las partículas que ingresan al volumen, el segundo término contempla la energía de las partículas que abandonan el volumen y el tercer término acumula todos los cambios en las energías en reposo de las partículas elementales involucradas en cualquier transformación nuclear. 
+
+	El \textit{kerma}, $K$, es para \cite{Mayles.2007} la energía cinética $\dd{E_{tr}}$ de las partículas cargadas ionizantes liberadas por partículas neutras ionizantes en un material de masa $\dd{m}$, sus unidades son las mismas que para la dosis absorbida. \cite{Podgorsak.2016} lo define como
 	
-	Es de suma importancia señalar que la cantidad en \ref{energia_administrada} es estocástica. Es el valor medio lo que concierne para el cálculo de dosis, pues este no es estocástico.
+	$$K=\dv{\bar{E}_{tr}}{m}$$
 	
-	El \textit{kerma}, $K$, es para \cite{Mayles.2007} la energía cinética $\dd{E_{tr}}$ de las partículas cargadas ionizantes liberadas por partículas neutras ionizantes en un material de masa $\dd{m}$, sus unidades son las mismas que para la dosis absorbida
+	El kerma contempla dos componentes, de acuerdo con \cite{Mayles.2007} y \cite{IAEA.2005} estas representan contribuciones de colisiones, $K_{col}$, y de los mecanismos radiativos debido a las partículas cargadas que emergen de la interacción de la materia con las partículas neutras, $K_{rad}$. Luego el kerma neto es
 	
-	$$K=\dv{E_{tr}}{m}$$
+	$$K=K_{col}+K_{rad}$$
 	
-	El kerma contempla dos componentes, de acuerdo con \cite{Mayles.2007} y \cite{IAEA.2005} estas representan contribuciones de colisiones, $K_{col}$, y de los mecanismos radiativos debido a las partículas cargadas que emergen de la interacción de la materia con las partículas neutras, $K_{rad}$. 
-	
-	El cálculo de la dosis, en concordancia con \cite{Mayles.2007}, requiere descripciones precisas del campo de radiación. Parte de este requisito es establecer los mecanismos de transferencia de energía, que en \cite{IAEA.2005} se dividen en interacciones de choques o colisiones e interacciones radiativias; estos contemplan, respectivamente, colisiones y radiación de frenado conjunto a la energía de aniquilación en pares electrón-positrón. 
+	El cálculo de la dosis, en concordancia con \cite{Mayles.2007} y \cite{Podgorsak.2016}, requiere descripciones precisas del campo de radiación. Parte de este requisito es establecer los mecanismos de transferencia de energía, que en \cite{IAEA.2005} se dividen en interacciones de choques o colisiones e interacciones radiativias; estos contemplan, respectivamente, colisiones y radiación de frenado conjunto a la energía de aniquilación en pares electrón-positrón. 
 	
 	El concepto de fluencia da una medida escalar del flujo de partículas en un área transversal, como contraparte para el kerma que se computa sobre procesos radiativos\cite{IAEA.2005}. \cite{Mayles.2007} define la fluencia a través de una esfera circundante a un punto $P$ como la diferencial del valor esperado del número de partículas fluyentes por unidad diferencial de sección transversal:
 	
@@ -560,7 +611,7 @@
 	
 	$$\Phi_E=\dv{\Phi}{E}$$
 	
-	Dando la fluencia total como una integral definida de la forma
+	\noindent Dando la fluencia total como una integral definida de la forma
 	
 	$$\Phi=\int_{0}^{E_{max}}\Phi_E \dd{E}$$
 	
@@ -574,57 +625,216 @@
 		K_{med}=\int_{0}^{E_{max}} E\Phi_E\left(\frac{\mu_{tr}(E)}{\rho}\right)_{med}\dd{E} \label{kerma_fluencia}
 	\end{equation}
 	
-	donde $E$ es la energía de cada uno de los $N$ fotones perpendicularmente incidentes en el material, $med$. 
+	\noindent donde $E$ es la energía de cada uno de los $N$ fotones perpendicularmente incidentes en el material, $med$. 
+	
+	De manera análoga, \cite{Podgorsak.2016} ofrece el siguiente esquema para obtener el kerma en un medio en función de la energía transferida a las partículas cargadas por las interacciones con los fotones:
+	
+	\begin{equation}
+		K_{med}=\Phi (\mu_m)_{med} \bar{E}_{tr}\label{kerma_en_medio_podgorsak}
+	\end{equation}
+	
+	\noindent dado que el producto $\Phi \times (\mu_m)_{med}$ da el número de interacciones fotónicas por unidad de masa del medio irradiado por una fluencia de fotones $\Phi$. 
+	
+	\cite{Podgorsak.2016} dicta una vía para obtener la dosis en un medio muy similar a la del kerma, también en términos de la fluencia fotónica y el coeficiente de atenuación lineal másico
+	
+	\begin{eqnarray}
+		\bar{D}_{med}=\Phi (\mu_m)_{med}\bar{E}_{ab}=\Phi (\mu_m)_{med}\bar{E}_{tr}(1-\bar{g})\label{dosis_enmedio_podgorsak}
+	\end{eqnarray}
+	
+	
+	\noindent donde la energía absorbida puede calcularse a partir de
+	
+	$$\bar{E}_{ab}=\bar{E}_{tr}-\bar{E}_{rad}=\bar{E}_{tr}-\bar{g}\times \bar{E}_{tr}$$
+	
+	\noindent cuando se conoce $\bar{g}$ de gráficos o estimaciones. 
+	
+	\section{Energía media depositada por fotones en partículas cargadas}
+	Siguiendo la línea de razonamiento de \cite{Podgorsak.2016}, la energía media transferida por fotones a los electrones dentro de los tres principales modos de interacción sería
+	
+	\begin{equation}
+		\bar{E}_{tr}=w_{PE}\bar{E}_{tr}^{PE}+w_{CE}\bar{E}_{tr}^{CE}+w_{PP}\bar{E}_{tr}^{PP} \label{energia_transferida_media_total}
+	\end{equation}
+	
+	\noindent donde los términos $\bar{E}_{tr}^{PE, CE, PP}$ son definidos como antes, mientras que los $w_{PE, CE, PP}$ son factores de peso relativo y dictan la probabilidad de que un modo de interacción suceda durante el paso de los fotones a través del medio. \cite{Podgorsak.2016} los define de la siguiente forma
+	
+	\begin{align}
+		w_{PE}&=\frac{\tau}{\mu}\\
+		w_{CE}&=\frac{\sigma_{CE}}{\mu}\\
+		w_{PP}&=\frac{\kappa}{\mu}
+	\end{align} 
+	
+	Tomando las expresiones en \ref{energia_cinetica_fotoelectrones}, \ref{energia_media_transferida_compton} y \ref{energia_media_transferida_prodpares} dentro de la ecuación \ref{energia_transferida_media_total} se obtiene el término $\sum E_{salientes}$ de la ecuación \ref{energia_administrada} para la energía administrada:
+	
+	\begin{equation}
+		\sum E_{salientes} = \frac{\tau}{\mu}\left(h\nu - P_K \omega_K E_B(K)\right) + \frac{\sigma_{CE}}{\mu}\left[h\nu \left(\frac{1+2\varepsilon - \sqrt{1+2\varepsilon}}{1+2\varepsilon}\right)\right] + \frac{\kappa}{\mu}\left(h\nu - 2m_ec^2\right)
+	\end{equation}
+	
+	Y la fracción radiativa media se puede estimar mediante los coeficientes de absorción y transferencia\cite{Podgorsak.2016} aplicando la fórmula
+	
+	$$\bar{g}=1-\frac{\mu_{ab}}{\mu_{tr}}$$
+	
+	\noindent cuando dichos coeficientes se conocen empíricamente. 
 	
 	\section{Modelado diferencial de la fracción de supervivencia}
 	Como primer acercamiento al problema, se propone plantear una ecuación diferencial del número de células supervivientes, $C_s$, en una muestra con respecto a la dosis absorbida por la muestra, $D$.
 	
 	\begin{equation}
-		\dv{C_s}{D}=-\alpha C_s \label{modelo_supervivencia_dosislineal_diferencial}
+		\dv{C_s}{D}=-A C_s \label{modelo_supervivencia_dosislineal_diferencial}
 	\end{equation}
 	
-	La resolución de esta ecuación diferencial daría el modelo de supervivencia lineal en \ref{exponencial_csc_dosis_lineal} como se demuestra a continuación
+	La resolución de esta ecuación diferencial daría el modelo de supervivencia lineal en \ref{exponencial_csc_dosis_lineal} con un coeficiente $A$ que no contiene los efectos biológicos.
 	
 	\begin{align}
-		\nonumber \dv{C_s}{D}&=-\alpha C_s\\
-		\nonumber \frac{\dd{C_s}}{C_s}&=-\alpha \dd{D}\\
-		-\int_{C_s}^{C_i} \frac{\dd{C_s'}}{C_s'}&=\int_{D}^{0} \alpha \dd{D}\label{integral_supervivencia_dosis_lineal}\\ 
-		\nonumber -\log(\frac{C_i}{C_s})&=\alpha(0-D)\\
-		\nonumber \log(\frac{C_s}{C_i})&=-\alpha D\\
-		\nonumber \frac{C_s}{C_i}&=\exp(-\alpha D)
+		\nonumber \dv{C_s}{D}&=-A C_s\\
+		\nonumber \frac{\dd{C_s}}{C_s}&=-A \dd{D}\\
+		-\int_{C_s}^{C_i} \frac{\dd{C_s'}}{C_s'}&=\int_{D}^{0} A \dd{D}\label{integral_supervivencia_dosis_lineal}\\ 
+		\nonumber -\ln(\frac{C_i}{C_s})&=A(0-D)\\
+		\nonumber \ln(\frac{C_s}{C_i})&=-A D\\
+		\nonumber \frac{C_s}{C_i}&=\exp(-A D)
 	\end{align}
 	 
-	Donde $C_i$ denota el número de células implantadas o presentes antes de la irradiación. En cuanto a la ecuación \ref{integral_supervivencia_dosis_lineal} se debe aclarar que los límites de integración del LD y el LI se corresponden uno a uno, en el sentido que ante una dosis nula se espera que sobreviva un número de células igual al número de células implantadas, siendo que a una dosis $D$ se observará una cantidad $C_s$ de células supervivientes. La fracción $C_s/C_i$ es una medida de la tasa de supervivencia.
+	\noindent Donde $C_i$ denota el número de colonias presentes antes de la irradiación. En cuanto a la ecuación \ref{integral_supervivencia_dosis_lineal} se debe aclarar que los límites de integración del LD y el LI se corresponden uno a uno, en el sentido que ante una dosis nula se espera que sobreviva un número de células igual al número de células iniciales, siendo que a una dosis $D$ se observará una cantidad $C_s$ de colonias supervivientes. La fracción $C_s/C_i$ es una medida de la tasa de supervivencia, $S$. 
 	
 	El objetivo en mano es pues obtener la ecuación \ref{modelo_supervivencia_dosislineal_diferencial}, así como su complemento cuadrático \ref{modelo_supervivencia_dosiscuadratico_diferencial}, cuya resolución devuelve precisamente la ecuación \ref{csc_linear_quadratic_model}.
 	
 	\begin{equation}
-		\dv{C_s}{D}=-\alpha C_s -2\beta DC_s\label{modelo_supervivencia_dosiscuadratico_diferencial}
+		\dv{C_s}{D}=-A C_s -2B DC_s\label{modelo_supervivencia_dosiscuadratico_diferencial}
 	\end{equation}
 	
-	Contemplando $C_s$ como una variable, nos interesa determinar la forma de $\alpha$ y $\beta$, las cuales tienen unidades de $\unit{gy^{-1}}$ y $\unit{gy^{-2}}$, respectivamente. 
+	\noindent Contemplando $C_s$ como una variable entera positiva, nos interesa determinar la forma de $A$ y $B$, las cuales tienen unidades de $\unit{Gy^{-1}}$ y $\unit{Gy^{-2}}$, respectivamente. 
 	
-	Según la teoría desarrollada en el capítulo \ref{fundamentos_fisico_biomedicos} los parámetros $\alpha$ y $\beta$ dictan la respuesta del tejido a la dosis recibida, pues la tasa a la que decae el número de células cultivadas está determinada por la magnitud de estos coeficientes. 
+	\subsection{Inferencia heurística de los coeficientes de superviviencia celular}\label{inferencia_heuristica_coeficientes}
+	Según la teoría desarrollada en el capítulo \ref{fundamentos_fisico_biomedicos} los parámetros $A$ y $B$ dictan la respuesta del tejido a la dosis recibida, pues la tasa a la que decae el número de células cultivadas está determinada por la magnitud de estos coeficientes. 
 	
-	En vista de que la medida de afección de la radiación ionizante en el tejido vivo recae en dos factores: la cantidad de energía administrada y el mecanismo de acción de los impactos o eventos letales (1 evento letal en muchos objetivos o 2 eventos letales en un solo objetivo), se puede contemplar que la interpretación de los coeficientes de muerte celular $\alpha$ y $\beta$ en las ecuaciones \ref{modelo_supervivencia_dosislineal_diferencial}, \ref{modelo_supervivencia_dosiscuadratico_diferencial} va en la línea de una probabilidad de supervivencia por unidad de dosis depositada y unidad de dosis cuadrada, respectivamente, como sugieren \cite{Tubiana.1990} y \cite{McMahon.2018}. 
+	En vista de que la medida de afección de la radiación ionizante en el tejido vivo recae en dos factores: la cantidad de energía administrada y el mecanismo de acción de los impactos o eventos letales (1 evento letal en muchos objetivos o 2 eventos letales en un solo objetivo), se puede contemplar que la interpretación de los coeficientes de supervivencia celular $\alpha$ y $\beta$ en las ecuaciones \ref{modelo_supervivencia_dosislineal_diferencial}, \ref{modelo_supervivencia_dosiscuadratico_diferencial} va en la línea de una probabilidad de supervivencia por unidad de dosis depositada y unidad de dosis cuadrada, respectivamente, como sugieren \cite{Tubiana.1990} y \cite{McMahon.2018}. 
 	
 	Las medidas de probabilidad referidas en el cálculo de los coeficientes de muerte celular dependerá de las condiciones del medio intracelular, el tipo de célula, el ciclo celular y la presencia de oxígeno. Si se construye un modelo ideal o \textit{toy model} del proceso, se pueden obviar varios de estos fenómenos y agregar complejidad a dicho modelo para volverlo más realista poco a poco. 
-%	$$\dv{S}{(E_{ab}/m)}=m\dv{S}{E_{ab}}=F\left(\frac{E_{ab}}{m}\right)$$
 	
-%	Donde $F$ es una función de la energía depositada por unidad de masa y $m$ es la masa del tejido absorbente. La función $F$ contempla todos los mecanismos de absorción de energía ionizante por la muestra orgánica. Pensando en la irradiación de un haz de fotones, se puede asimilar que esta sería una función de la energía depositada por rayos X o rayos $\gamma$ dentro de los límites radio-terapéuticos. 
-
-	\chapter{Simulación numérica de los modelos de supervivencia celular}
+	Una construcción intuitiva del coeficiente lineal de supervivencia celular vendría en la forma de un cociente de masa irradiada sobre energía administrada en esa muestra de materia. 
+	
+	$$A\propto\frac{M}{\bar{E}_{ab}}$$
 		
+	Lo que constituye un recíproco de dosis, propiamente. Al ver la expresión para el valor esperado de la dosis en el medio dada en \ref{dosis_segun_carlsson}, se puede construir el coeficiente lineal de supervivencia celular de manera heurística. Sea $\bar{b}$ la media de la tasa de absorción de energía del flujo de fotones por diferencial de masa del absorbente, definida como
+
+	$$\bar{d}=\dv{\bar{E}}{m}$$
+	
+	\noindent supóngase que se racionaliza cada infinitesimal con una diferencial de volumen del medio transitado por los fotones
+	
+	$$\bar{d}=\frac{\dv{\bar{E}}{V}}{\dv{m}{V}}=\frac{1}{\rho}\dv{\bar{E}}{V}$$
+	
+	\noindent se puede pensar en esta expresión como la razón de la densidad volumétrica de energía de los fotones en el volumen del medio con respecto a la densidad del absorbente. 
+	
+	Viendo que esta tasa de absorción está ligada a la energía neta del haz de fotones, se puede pensar en $\bar{E}$ como el producto de la media de la energía absorbida y el número de fotones al atravesar un diferencial de área $\dd{A}$ a lo largo de un diferencial de longitud $\dd{l}$:
+	
+	$$\bar{d}=\frac{1}{\rho}\dv{(N\bar{E}_{ab})}{A\dd{l}}$$
+	
+	\noindent como el promedio de la energía absorbida es una constante, pero su número atravesando una región del medio no es necesariamente la misma en dos instantes distintos, se tiene
+	
+	$$\bar{d}=\frac{1}{\rho\dd{l}}\dv{N}{A}\bar{E}_{ab}$$
+	
+	Al multiplicar esta tasa de absorción por la fracción de fotones $\dd{N}/N$ que genuinamente depositan energía en el material al interactuar con él se obtiene la dosis depositada en el medio:
+	
+	$$\bar{D}\equiv \left(\frac{\dd{N}}{N}\right)\bar{d}=\frac{1}{\rho N}\dv{N}{l}\dv{N}{A}\bar{E}_{ab}=\Phi(\mu_m)_{med}\bar{E}_{ab}=\Phi(\mu_m)_{med}\bar{E}_{tr}\left(1-\frac{\mu_{ab}}{\mu_{tr}}\right)$$
+	
+	\noindent donde los factores $\dd{N}/\dd{A}=\Phi$ y $(N\rho)^{-1}(\dd{N}/\dd{l})=\mu_m$ son los ya conocidos afluencia fotónica y coeficiente de atenuación lineal másico. Esta dosis en particular debe ser la requerida para lograr una supervivencia del $37\%$ de las colonias iniciales.
+	
+	Suponiendo que la masa de una colonia es $M_C$, entonces la masa del tejido que conformar está dado por $C_i\times M_C$. La dosis $D_0$ representa esa deposición de energía que reduce la masa inicial del cultivo $M_i$ a una cantidad $M_S=(0.37C_i)\times M_i$, esto se manifiesta a nivel de dosis en la siguiente forma
+	
+	$$D_0=\Phi \left(\frac{\mu}{0.37\rho}\right)_{med}\bar{E_{ab}}$$
+	
+	\noindent que equivale a
+	
+	$$D_0\approx (2.71\Phi)(\mu_m)_{med}\bar{E}_{tr}=2.71\bar{D}$$
+	
+	Luego, el coeficiente lineal de supervivencia para el \textit{toy model} es
+	
+	\begin{equation}
+		A = D_0^{-1} = 0.37\left(\Phi (\mu_m)_{med} \bar{E}_{ab}\right)^{-1}
+	\end{equation}
+	
+	La construcción del parámetro $B$ se guía desde la idea de que el que cociente $\alpha/\beta$ dicta un valor de dosis donde ambos modos de muerte celular tienen el mismo efecto. En este sentido, suponiendo que $A=1/D'_{37}$ y que $D^{*}=A/B$ entonces
+	
+	$$D^{*}=\frac{1}{B(D'_0)}$$
+	
+	Luego, según el modelo cuadrático 
+	
+	$$S(D^{*})=\exp\left[-B\left(\frac{1}{B(D'_0)}\right)^2\right]=S(D'_0)=e^{-1}$$
+	
+	\noindent esto es
+	
+	$$-\frac{1}{B(D'_0)^2}=\ln(e^{-1})$$
+	
+	$$B=\frac{1}{(D'_0)^2}=A^2$$
+	
+	Igual comportamiento se esperaría en los coeficientes verdaderos $\alpha$ y $\beta$. No obstante, se debe tomar en cuenta que el modelo lineal cuadrático surge de una regresión, por lo que no contienen la naturaleza precisa del fenómeno y desviaciones de esta tendencia han de encontrarse. Tal evento se puede apreciar al comparar así los coeficientes en \cite{Leeuwen.2018} para diferentes casos clínicos. 
+
+	\chapter{Prueba del \textit{toy model}}
+	En la sección \ref{inferencia_heuristica_coeficientes} se planteó que la dosis letal media para un $37\%$ de probabilidad de supervivencia es
+	
+	
+	$$D'_0=2.71\bar{D}=2.71\times \Phi \mu_{m} \bar{E}_{tr}(1-\bar{g})$$
+	
+	Se plantea el siguiente escenario: un haz de rayos X (baja LET) con una energía media de $\unit[3]{MeV}$\cite{Podgorsak.2016} es proyectado sobre tejido blando ($H_{63}C_6O_{28}N$)\cite{Alburiahi.2019} con $\mu_m=\unit[3.929\times10^{-2}]{cm^2g^{-1}}$ según \cite{NIST.2017} y $\mu_{ab}=\unit[2.25\times 10^{-2}]{cm^2g^{-1}}$ según \cite{NIST.2017}. Se quiere estimar un valor para $\alpha$ y $\beta$ mediante los parámetros idealizados $A$ y $B$. 
+	
+	La energía transferida es 
+	
+	$$\bar{E}_{tr}=\frac{\tau}{\mu}\left(h\nu - P_K \omega_K E_B(K)\right) + \frac{\sigma_{CE}}{\mu}\left[h\nu \left(\frac{1+2\varepsilon - \sqrt{1+2\varepsilon}}{1+2\varepsilon}\right)\right] + \frac{\kappa}{\mu}\left(h\nu - 2m_ec^2\right)$$
+	
+	\noindent que se puede arreglar como:
+	
+	$$\mu_m\bar{E}_{tr}=\frac{\tau}{\rho}\left(h\nu - P_K \omega_K E_B(K)\right) + \frac{\sigma_{CE}}{\rho}\left[h\nu \left(\frac{1+2\varepsilon - \sqrt{1+2\varepsilon}}{1+2\varepsilon}\right)\right] + \frac{\kappa}{\rho}\left(h\nu - 2m_ec^2\right)$$
+	
+	\noindent donde 
+	
+	$$h\nu=\unit[3.0]{MeV} \times \frac{\unit[1.6022\times 10^{-13}]{J}}{\unit[1]{MeV}}=\unit[4.8\times 10^{-13}]{J}$$
+	
+	$$\rho=\unit{1.02}{gcm^{-3}}$$
+	
+	Según \cite{NIST.2017} y la base de datos $XCOM$ mientras que los parámetros para las interacciones fotónicas son, según $XCOM$
+	
+	$$\tau_m=\unit[2.145\times 10^{-7}]{cm^2g^{-1}}$$
+	$$\sigma_m=\unit[4.278\times 10^{-6}]{cm^2 g^{-1}}$$
+	$$\kappa_m=\unit[1.215\times 10^{-5}]{cm^2 g^{-1}}$$
+	
+	Mientras que el número atómico efectivo está dado por la expresión \ref{numero_atomico_efectivo}
+	
+	$$Z_{eff}=\left(0.000876\times 1^{3.5}+0.998931\times 6^{3.5}+0.000193\times 7^{3.5}\right)^{1/3.5}=6.00<10$$
+	
+	\noindent con datos provenientes de la base de datos $XCOM$. Este valor de número atómico efectivo da un $\omega_K=0$ de acuerdo con \cite{Podgorsak.2016}. 
+	
+	Tomando el valor aceptado en la literatura \cite{Podgorsak.2016, IAEA.2010, IAEA.2005, Mayles.2007} para la energía en reposo del electrón como $\unit[0.511]{MeV}=\unit[8.187\times 10^{-14}1]{J}$ se computa $\varepsilon$ como
+	
+	$$\varepsilon=\frac{4.8\times10^{-13}}{8.2\times 10^{-14}}=5.9$$
+	
+	Estos valores en conjunto dan la siguiente expresión:
+	
+	\begin{align*}
+		\mu_m \bar{E}_{tr}=&(2.145\times 10^{-7})(4.8\times 10^{-13})+(4.278\times 10^{-8})\left[(4.8\times 10^{-13})\left(\frac{1+2 \times5.9-\sqrt{1+2\times 5.9}}{1+2\times 5.9}\right)\right]\\
+		&+\unit[1.215\times10^{-5}(4.8\times 10^{-13} - 2\times 8.187\times 10^{-14})]{cm^2 Jg^{-1}}\\
+		\mu_m \bar{E}_{tr}=&\unit[3.96\times 10^{-18}]{cm^2 Jg^{-1}}
+	\end{align*}
+	
+	Suponiendo una fluencia de fotones $\Phi=\unit[5.00\times 10^{10}]{cm^{-2}}$ la dosis $D'_0$ es:
+	
+	$$D'_0=(2.71)\times (\unit[5.00\times 10^{12}]{cm^{-2}})\left(\unit[3.96]{cm^2 Jg^{-1}}\times\frac{\unit[1000]{g}}{\unit[1]{kg}}\right)=\unit[5.36\times10^{-2}]{Jkg^{-1}}$$
+	
+	\noindent o lo que es equivalente, $\unit[5.36]{cGy}$. Esto resulta en un valor de $\unit[A=18.6]{Gy^{-1}}$ como coeficiente lineal de supervivencia, mientras que el coeficiente cuadrático $B=\unit[347]{Gy^{-2}}$. Estos valores resultan ser bastante altos para tumores en tejido blando, como ser los valores que \cite{Leeuwen.2018} reporta en las figuras 1 y 2. 
+	
+	La curva de este modelo, generada en \textit{GNU/Octave} es la siguiente
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.30]{figuras/Csc_toymodel.png}
+		\caption{CSC del toy model heurístico generado en \textit{GNU/Octave} con $A=\unit[18.6]{Gy^{-1}}$ y $B=\unit[347]{Gy^{-2}}$ con el eje de dosis en la escala de $10^2$ unidades.}\label{figura_curva_mia}
+	\end{figure}  
+	
 	\chapter{Conclusiones}
 	
-	\appendix
-	\clearpage
-	\addappheadtotoc
-	\appendixpage
+	El cálculo teórico de los coeficientes de supervivencia celular amerita un estudio profundo de las interacciones de la radiación ionizante con la materia orgánica, pues los efectos biológicos resultantes de dichas interacciones juegan un rol determinante en la evolución de los cultivos y las colonias \textit{in vivo} bajo estudio. Las cinco R de la radiobiología precisan de una definición cuantitativa en términos de la medida en que las células se ven afectadas por el desdoblamiento de las cadenas de ADN en el núcleo celular. Dado que estos procesos son estocásticos, como bien mencionan \cite{Mayles.2007}, \cite{McMahon.2018}, \cite{Hall.2000} entre otros radiobiólogos y biofísicos, la probabilidad de que ocurra un evento letal a través de una colisión directa con los fotones de un haz debe formar parte de esta construcción matemática. 
 	
-	\chapter{Formalismo matemático}
+	Los procesos de absorción de energía son una cuestión fundamental termodinámica. Se mantiene interesante la cuestión de cómo modelar las interacciones de la radiación electromagnética (desde una perspectiva corpuscular) en el seno del estudio del calor y sus mecanismos de transferencia así como sus implicaciones a nivel atómico, molecular y, ¿por qué no? sub-atómico. Consideraciones de esta índole podrían, quizá, necesitar una fundamentación termo-estadística o mecánico-cuántica. Y se presenta, naturalmente, como una motivación para seguir estudiando estos procesos. 
 	
-	\chapter{Demostraciones relevantes}
+	El acercamiento heurístico, aunque bien es intuitivo, no revela demasiada información útil sobre los mecanismos de destrucción celular. Pues al no incluir una definición precisa de los efectos biológicos no logra asimilar la naturaleza del fenómeno en cuestión. No obstante, como se puede observar en la figura \ref{figura_curva_mia}, la curva generada por este modelo sigue una forma típica de una CSC como aquellas presentadas en la literatura consultada como \cite{Bleehen.2007}, \cite{Hall.2000}, \cite{Mayles.2007} y  \cite{Tubiana.1990}. Lo que, personalmente, es producto de motivación y un esbozo de haber encaminado bien este proyecto a pesar de la informalidad del modelado. 	
 
 	\bibliography{seminar_bibliography.bib}
 	\bibliographystyle{apalike}

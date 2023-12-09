@@ -23,15 +23,14 @@
 \contentsline {subsection}{\numberline {1.3.3}El efecto del oxígeno}{13}%
 \contentsline {subsection}{\numberline {1.3.4}Las 5 R de la radioterapia}{14}%
 \contentsline {chapter}{\numberline {2}Marco físico para la determinación de un modelo de supervivencia celular}{16}%
-\contentsline {section}{\numberline {2.1}Interacciones de la radiación con la materia}{16}%
+\contentsline {section}{\numberline {2.1}Interacciones de la radiación con la materia}{17}%
 \contentsline {subsection}{\numberline {2.1.1}Efecto y absorción fotoeléctricos}{18}%
-\contentsline {subsection}{\numberline {2.1.2}Dispersión Compton o incoherente}{18}%
-\contentsline {subsection}{\numberline {2.1.3}Producción de pares}{19}%
-\contentsline {subsection}{\numberline {2.1.4}Contribuciones a los coeficientes de atenuación}{19}%
-\contentsline {section}{\numberline {2.2}Fundamentos sobre dosimetría de las radiaciones}{20}%
-\contentsline {section}{\numberline {2.3}Modelado diferencial de la fracción de supervivencia}{21}%
-\contentsline {chapter}{\numberline {3}Simulación numérica de los modelos de supervivencia celular}{23}%
-\contentsline {chapter}{\numberline {4}Conclusiones}{24}%
-\contentsline {chapter}{Anexos}{25}%
-\contentsline {chapter}{\numberline {A}Formalismo matemático}{26}%
-\contentsline {chapter}{\numberline {B}Demostraciones relevantes}{27}%
+\contentsline {subsection}{\numberline {2.1.2}Dispersión Compton o incoherente}{19}%
+\contentsline {subsection}{\numberline {2.1.3}Producción de pares}{20}%
+\contentsline {subsection}{\numberline {2.1.4}Contribuciones a los coeficientes de atenuación}{20}%
+\contentsline {section}{\numberline {2.2}Fundamentos sobre dosimetría de las radiaciones}{21}%
+\contentsline {section}{\numberline {2.3}Energía media depositada por fotones en partículas cargadas}{23}%
+\contentsline {section}{\numberline {2.4}Modelado diferencial de la fracción de supervivencia}{24}%
+\contentsline {subsection}{\numberline {2.4.1}Inferencia heurística de los coeficientes de superviviencia celular}{24}%
+\contentsline {chapter}{\numberline {3}Prueba del \textit {toy model}}{27}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{30}%
