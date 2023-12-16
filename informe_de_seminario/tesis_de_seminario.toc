@@ -31,6 +31,6 @@
 \contentsline {section}{\numberline {2.2}Fundamentos sobre dosimetría de las radiaciones}{21}%
 \contentsline {section}{\numberline {2.3}Energía media depositada por fotones en partículas cargadas}{23}%
 \contentsline {section}{\numberline {2.4}Modelado diferencial de la fracción de supervivencia}{24}%
-\contentsline {subsection}{\numberline {2.4.1}Inferencia heurística de los coeficientes de superviviencia celular}{24}%
+\contentsline {subsection}{\numberline {2.4.1}Inferencia heurística de los coeficientes de supervivencia celular}{24}%
 \contentsline {chapter}{\numberline {3}Prueba del \textit {toy model}}{27}%
 \contentsline {chapter}{\numberline {4}Conclusiones}{30}%
